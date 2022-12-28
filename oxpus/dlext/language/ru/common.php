@@ -837,30 +837,30 @@ $lang = array_merge($lang, [
 	'DL_REPORT_STATUS_4'	=> 'завершено',
 	'DL_REPORT_STATUS_5'	=> 'удален',
 
-	'DL_BUG_REPORT_EMAIL_STATUS'	=> 'This message was left regarding the new status:
+	'DL_BUG_REPORT_EMAIL_STATUS'	=> 'Оставлено сообщение о новом статусе:
 	--------------------
 	%s
 	--------------------',
 
-	'DL_NOTIFICATIONS'				=> 'Download notifications',
-	'DL_NOTIFICATIONS_MOD'			=> 'Moderation of downloads',
-	'DL_NOTIFICATIONS_TRACKER'		=> 'Bug Tracker Reports',
+	'DL_NOTIFICATIONS'				=> 'Уведомления загрузок',
+	'DL_NOTIFICATIONS_MOD'			=> 'Модерация загрузок',
+	'DL_NOTIFICATIONS_TRACKER'		=> 'Отчеты об ошибках',
 
-	'DL_NOTIFY_TYPE_BT_ASSIGN'		=> 'Someone assigned a report to me',
-	'DL_NOTIFY_TYPE_BT_STATUS'		=> 'Someone changed the status of a report',
-	'DL_NOTIFY_TYPE_NEW'			=> 'Someone added a new download',
-	'DL_NOTIFY_TYPE_UPDATE'			=> 'Someone changed a download from your favorites',
-	'DL_NOTIFY_TYPE_APPROVE'		=> 'A download must be approved',
-	'DL_NOTIFY_TYPE_BROKEN'			=> 'Someone reported a download',
-	'DL_NOTIFY_TYPE_CAPPROVE'		=> 'A comment must be approved',
-	'DL_NOTIFY_TYPE_COMMENTS'		=> 'Someone commented on a download from your favorites',
+	'DL_NOTIFY_TYPE_BT_ASSIGN'		=> 'Кто-то назначил мне отчет',
+	'DL_NOTIFY_TYPE_BT_STATUS'		=> 'Кто-то изменил статус отчета',
+	'DL_NOTIFY_TYPE_NEW'			=> 'Кто-то добавил новую загрузку',
+	'DL_NOTIFY_TYPE_UPDATE'			=> 'Кто-то изменил загрузку из вашего избранного',
+	'DL_NOTIFY_TYPE_APPROVE'		=> 'Скачивание должно быть одобрено',
+	'DL_NOTIFY_TYPE_BROKEN'			=> 'Кто-то сообщил о загрузке',
+	'DL_NOTIFY_TYPE_CAPPROVE'		=> 'Комментарий должен быть одобрен',
+	'DL_NOTIFY_TYPE_COMMENTS'		=> 'Кто-то прокомментировал загрузку из избранного',
 
-	'DL_NOTIFY_BT_ASSIGN'			=> '<strong>Assigned</strong> report: %1$s',
-	'DL_NOTIFY_BT_STATUS'			=> '<strong>New</strong> status of report: %1$s',
-	'DL_NOTIFY_NEW'					=> '<strong>New</strong> download: %1$s',
-	'DL_NOTIFY_UPDATE'				=> '<strong>Changed</strong> download: %1$s',
-	'DL_NOTIFY_APPROVE'				=> '<strong>Approval</strong> requested for download: %1$s',
-	'DL_NOTIFY_BROKEN'				=> '<strong>Reported</strong> download: %1$s',
-	'DL_NOTIFY_CAPPROVE'			=> '<strong>Approval</strong> requestet for comment on download: %1$s',
-	'DL_NOTIFY_COMMENTS'			=> '<strong>New</strong> comment on download: %1$s',
+	'DL_NOTIFY_BT_ASSIGN'			=> '<strong>Назначенный</strong> отчет: %1$s',
+	'DL_NOTIFY_BT_STATUS'			=> '<strong>Новый</strong> статус отчета: %1$s',
+	'DL_NOTIFY_NEW'					=> '<strong>Новый</strong> загрузка: %1$s',
+	'DL_NOTIFY_UPDATE'				=> '<strong>Изменена</strong> загрузка: %1$s',
+	'DL_NOTIFY_APPROVE'				=> '<strong>Запрошено одобрение</strong> для загрузки: %1$s',
+	'DL_NOTIFY_BROKEN'				=> '<strong>Сообщение</strong> о загрузке: %1$s',
+	'DL_NOTIFY_CAPPROVE'			=> '<strong>Подтверждение</strong> запроса на комментарий к загрузке: %1$s',
+	'DL_NOTIFY_COMMENTS'			=> '<strong>Новый</strong> комментарий при загрузке: %1$s',
 ]);
