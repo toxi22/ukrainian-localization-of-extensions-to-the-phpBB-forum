@@ -827,7 +827,7 @@ $lang = array_merge($lang, [
 	'DL_USERS_TRAFFIC_TITLE'				=> 'Трафик для всех пользователей',
 
 	'DL_VIEW_BUG_REPORTS'		=> '%d отчетов',
-	'DL_VIEW_DOWNLOADS_NUM'		=> '%d загрузок',
+	'DL_VIEW_DOWNLOADS_NUM'		=> '%d файлов',
 	'DL_VIEW_DL_STATS'			=> '%d записей',
 
 	'DL_REPORT_STATUS_0'	=> 'новый',
@@ -842,25 +842,25 @@ $lang = array_merge($lang, [
 	%s
 	--------------------',
 
-	'DL_NOTIFICATIONS'				=> 'Уведомления загрузок',
-	'DL_NOTIFICATIONS_MOD'			=> 'Модерация загрузок',
+	'DL_NOTIFICATIONS'				=> 'Уведомления о файлах',
+	'DL_NOTIFICATIONS_MOD'			=> 'Модерация файлов',
 	'DL_NOTIFICATIONS_TRACKER'		=> 'Отчеты об ошибках',
 
 	'DL_NOTIFY_TYPE_BT_ASSIGN'		=> 'Кто-то назначил мне отчет',
 	'DL_NOTIFY_TYPE_BT_STATUS'		=> 'Кто-то изменил статус отчета',
-	'DL_NOTIFY_TYPE_NEW'			=> 'Кто-то добавил новую загрузку',
-	'DL_NOTIFY_TYPE_UPDATE'			=> 'Кто-то изменил загрузку из вашего избранного',
+	'DL_NOTIFY_TYPE_NEW'			=> 'Кто-то добавил новый файл',
+	'DL_NOTIFY_TYPE_UPDATE'			=> 'Кто-то изменил файл из вашего избранного',
 	'DL_NOTIFY_TYPE_APPROVE'		=> 'Скачивание должно быть одобрено',
-	'DL_NOTIFY_TYPE_BROKEN'			=> 'Кто-то сообщил о загрузке',
+	'DL_NOTIFY_TYPE_BROKEN'			=> 'Кто-то сообщил о файле',
 	'DL_NOTIFY_TYPE_CAPPROVE'		=> 'Комментарий должен быть одобрен',
-	'DL_NOTIFY_TYPE_COMMENTS'		=> 'Кто-то прокомментировал загрузку из избранного',
+	'DL_NOTIFY_TYPE_COMMENTS'		=> 'Кто-то прокомментировал файл из избранного',
 
 	'DL_NOTIFY_BT_ASSIGN'			=> '<strong>Назначенный</strong> отчет: %1$s',
 	'DL_NOTIFY_BT_STATUS'			=> '<strong>Новый</strong> статус отчета: %1$s',
-	'DL_NOTIFY_NEW'					=> '<strong>Новый</strong> загрузка: %1$s',
-	'DL_NOTIFY_UPDATE'				=> '<strong>Изменена</strong> загрузка: %1$s',
-	'DL_NOTIFY_APPROVE'				=> '<strong>Запрошено одобрение</strong> для загрузки: %1$s',
-	'DL_NOTIFY_BROKEN'				=> '<strong>Сообщение</strong> о загрузке: %1$s',
-	'DL_NOTIFY_CAPPROVE'			=> '<strong>Подтверждение</strong> запроса на комментарий к загрузке: %1$s',
-	'DL_NOTIFY_COMMENTS'			=> '<strong>Новый</strong> комментарий при загрузке: %1$s',
+	'DL_NOTIFY_NEW'					=> '<strong>Новый</strong> файл: %1$s',
+	'DL_NOTIFY_UPDATE'				=> '<strong>Изменен</strong> файл: %1$s',
+	'DL_NOTIFY_APPROVE'				=> '<strong>Запрошено одобрение</strong> для файла: %1$s',
+	'DL_NOTIFY_BROKEN'				=> '<strong>Уведомление</strong> о файле: %1$s',
+	'DL_NOTIFY_CAPPROVE'			=> '<strong>Подтверждение</strong> запроса на комментарий к файлу: %1$s',
+	'DL_NOTIFY_COMMENTS'			=> '<strong>Новый</strong> комментарий к файлу: %1$s',
 ]);
