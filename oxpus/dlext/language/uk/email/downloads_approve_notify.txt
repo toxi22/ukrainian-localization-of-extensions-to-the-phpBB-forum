@@ -1,0 +1,18 @@
+Subject: New Download
+
+Hello {{ USERNAME }},
+
+You are receiving this email because there is a new or edited download on "{{ SITENAME }}" in the category "{{ CATEGORY }}" which awaits approval:
+
+---------------------------
+{{ DOWNLOAD }}
+{{ DESCRIPTION }}
+---------------------------
+
+If you want to approve this download please click the following link:
+
+{{ U_APPROVE }}
+
+Remember that you can always choose not to be notified about new or edited downloads by changing the appropriate setting in your user profile.
+
+{{ EMAIL_SIG }}
