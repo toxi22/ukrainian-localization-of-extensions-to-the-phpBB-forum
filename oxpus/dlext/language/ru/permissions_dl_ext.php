@@ -27,13 +27,13 @@ if (empty($lang) || !is_array($lang))
 
 // Download Extension Permissions
 $lang = array_merge($lang, [
-	'ACP_DOWNLOADS'			=> 'Панель загрузки',
+	'ACP_DOWNLOADS'			=> 'Панель файлов',
 
 	'ACL_A_DL_OVERVIEW'		=> 'Может быть виден начальный экран',
 	'ACL_A_DL_CONFIG'		=> 'Может управлять общими настройками',
 	'ACL_A_DL_TRAFFIC'		=> 'Может управлять трафиком',
 	'ACL_A_DL_CATEGORIES'	=> 'Может управлять категориями',
-	'ACL_A_DL_FILES'		=> 'Может управлять загрузками',
+	'ACL_A_DL_FILES'		=> 'Может управлять файлами',
 	'ACL_A_DL_PERMISSIONS'	=> 'Может управлять разрешениями',
 	'ACL_A_DL_STATS'		=> 'Может просматривать и управлять статистикой',
 	'ACL_A_DL_BLACKLIST'	=> 'Может управлять черным списком расширений файлов',
