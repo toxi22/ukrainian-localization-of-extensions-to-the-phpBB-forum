@@ -1,18 +1,18 @@
-Subject: New Download Comment
+Subject: Коментар до нового файлу
 
-Hello {{ USERNAME }},
+Привіт, {{ USERNAME }} !
 
-You are receiving this email because there is a new download comment on "{{ SITENAME }}" for one of your subscribed downloads:
+Ви отримали цей електронний лист, тому що на форумі "{{ SITENAME }}" є новий коментар до одного з ваших файлів, на які ви підписані:
 
 ---------------------------
-Category {{ CATEGORY }}
-Download {{ DOWNLOAD }}
+Категорія {{ CATEGORY }}
+Файл {{ DOWNLOAD }}
 ---------------------------
 
-If you want to take a look on this comment please click the following link:
+Якщо ви хочете подивитись цей коментар, будь ласка, перейдіть за посиланням:
 
 {{ U_DOWNLOAD }}
 
-Remember that you can always choose not to be notified about new comments by changing the appropriate setting in your user profile.
+Пам\'ятайте, що ви завжди можете відмовитися від отримання повідомлень про нові коментарі, змінивши відповідне налаштування у своєму профілі користувача.
 
 {{ EMAIL_SIG }}

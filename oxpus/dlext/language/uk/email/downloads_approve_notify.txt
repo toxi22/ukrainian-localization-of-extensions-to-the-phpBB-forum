@@ -1,18 +1,18 @@
-Subject: New Download
+Subject: Новий файл
 
-Hello {{ USERNAME }},
+Привіт, {{ USERNAME }} !
 
-You are receiving this email because there is a new or edited download on "{{ SITENAME }}" in the category "{{ CATEGORY }}" which awaits approval:
+Ви отримали цей електронний лист, тому що на форумі "{{ SITENAME }}" в категорії "{{ CATEGORY }}" є нове або зміний файл, яке очікує схвалення:
 
 ---------------------------
 {{ DOWNLOAD }}
 {{ DESCRIPTION }}
 ---------------------------
 
-If you want to approve this download please click the following link:
+Якщо ви бажаєте схвалити цей файл, перейдіть за посиланням:
 
 {{ U_APPROVE }}
 
-Remember that you can always choose not to be notified about new or edited downloads by changing the appropriate setting in your user profile.
+Пам\'ятайте, що ви завжди можете відмовитися від повідомлень про нові або змінені файли, змінивши відповідне налаштування у своєму профілі користувача.
 
 {{ EMAIL_SIG }}

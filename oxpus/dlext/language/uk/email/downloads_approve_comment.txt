@@ -1,14 +1,14 @@
-Subject: New Download Comment
+Subject: Коментар до нового файлу
 
-Hello {{ USERNAME }},
+Привіт {{ USERNAME }} !
 
-You are receiving this email because there is a new or edited download comment for "{{ DOWNLOAD }}" on "{{ SITENAME }}" in the category "{{ CATEGORY }}" which awaits approval.
+Ви отримали цей лист, оскільки є новий або відредагований коментар до файлу "{{ DOWNLOAD }}" на форумі "{{ SITENAME }}" в категорії "{{ CATEGORY }}", який очікує схвалення.
 
-If you want to approve this comment please click the following link:
+Якщо ви бажаєте схвалити цей коментар, перейдіть за посиланням:
 
 {{ U_APPROVE }}
 
-Or you can view this comment by using this link:
+Або ви можете переглянути коментар, використовуючи посилання:
 
 {{ U_DOWNLOAD }}
 

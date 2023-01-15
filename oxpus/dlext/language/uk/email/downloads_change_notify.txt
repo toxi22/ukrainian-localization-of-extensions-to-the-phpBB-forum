@@ -1,18 +1,18 @@
-Subject: Changed Download
+Subject: Змінений файл
 
-Hello {{ USERNAME }},
+Привіт, {{ USERNAME }} !
 
-You are receiving this email because the following download on "{{ SITENAME }}" in the category "{{ CATEGORY }}" has been changed:
+Ви отримали цей електронний лист, тому що файл на на форумі "{{ SITENAME }}" в категорії "{{ CATEGORY }}" було змінено:
 
 ---------------------------
 {{ DOWNLOAD }}
 {{ DESCRIPTION }}
 ---------------------------
 
-If you want to take a look on this download please click the following link:
+Якщо ви хочете переглянути файл, будь ласка, перейдіть за посиланням:
 
 {{ U_CATEGORY }}
 
-Remember that you can always choose not to be notified about edited downloads by changing the appropriate setting in your user profile.
+Пам\'ятайте, що ви завжди можете відмовитись від повідомлень про змінені файли, змінивши відповідне налаштування у своєму профілі користувача.
 
 {{ EMAIL_SIG }}

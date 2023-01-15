@@ -27,18 +27,18 @@ if (empty($lang) || !is_array($lang))
 
 // Download Extension Permissions
 $lang = array_merge($lang, [
-	'ACP_DOWNLOADS'			=> 'Download Panel',
+	'ACP_DOWNLOADS'			=> 'Панель файлів',
 
-	'ACL_A_DL_OVERVIEW'		=> 'Can see the start screen',
-	'ACL_A_DL_CONFIG'		=> 'Can manage general settings',
-	'ACL_A_DL_TRAFFIC'		=> 'Can manage traffic',
-	'ACL_A_DL_CATEGORIES'	=> 'Can manage categories',
-	'ACL_A_DL_FILES'		=> 'Can manage downloads',
-	'ACL_A_DL_PERMISSIONS'	=> 'Can manage permissions',
-	'ACL_A_DL_STATS'		=> 'Can view and manage statistics',
-	'ACL_A_DL_BLACKLIST'	=> 'Can manage the file extension blacklist',
-	'ACL_A_DL_TOOLBOX'		=> 'Can use the toolbox',
-	'ACL_A_DL_FIELDS'		=> 'Can manage user defined fields',
-	'ACL_A_DL_PERM_CHECK'	=> 'Can check user permissions',
-	'ACL_A_DL_ASSISTANT'	=> 'Can run the setup wizard',
+	'ACL_A_DL_OVERVIEW'		=> 'Може бачити початковий екран',
+	'ACL_A_DL_CONFIG'		=> 'Може керувати загальними налаштуваннями',
+	'ACL_A_DL_TRAFFIC'		=> 'Може керувати трафіком',
+	'ACL_A_DL_CATEGORIES'	=> 'Може керувати категоріями',
+	'ACL_A_DL_FILES'		=> 'Може керувати завантаженнями',
+	'ACL_A_DL_PERMISSIONS'	=> 'Може керувати правами',
+	'ACL_A_DL_STATS'		=> 'Може переглядати та керувати статистикою',
+	'ACL_A_DL_BLACKLIST'	=> 'Може керувати чорним списком розширень файлів',
+	'ACL_A_DL_TOOLBOX'		=> 'Може використовувати набір інструментів',
+	'ACL_A_DL_FIELDS'		=> 'Може керувати полями користувача',
+	'ACL_A_DL_PERM_CHECK'	=> 'Може перевіряти права користувача',
+	'ACL_A_DL_ASSISTANT'	=> 'Може запустити майстер установки',
 ]);

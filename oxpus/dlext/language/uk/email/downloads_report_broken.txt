@@ -1,9 +1,9 @@
-Subject: Broken Download
+Subject: Непрацюючий файл
 
-Hello {{ USERNAME }},
+Привіт, {{ USERNAME }} !
 
-You are receiving this email because "{{ REPORTER }}" has reported a broken download on "{{ SITENAME }}".
-Please use the following link to check this report:
+Ви отримали цей лист, тому що "{{ REPORTER }}" повідомив про помилку завантаження на форумі "{{ SITENAME }}".
+Будь ласка, скористайтеся наступним посиланням, щоб перевірити цей звіт:
 
 ---------------------------
 {{ U_DOWNLOAD }}

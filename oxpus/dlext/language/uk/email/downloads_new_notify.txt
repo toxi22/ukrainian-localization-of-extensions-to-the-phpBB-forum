@@ -1,18 +1,18 @@
-Subject: New Download
+Subject: Новий файл
 
-Hello {{ USERNAME }},
+Привіт, {{ USERNAME }} !
 
-You are receiving this email because there is a new download on "{{ SITENAME }}" in the category "{{ CATEGORY }}":
+Ви отримали цей лист, тому що на форумі "{{ SITENAME }}" в категорії "{{ CATEGORY }}" є новий файл:
 
 ---------------------------
 {{ DOWNLOAD }}
 {{ DESCRIPTION }}
 ---------------------------
 
-If you want to take a look on this download please click the following link:
+Якщо ви хочете подивитися на це завантаження, будь ласка, перейдіть за посиланням:
 
 {{ U_CATEGORY }}
 
-Remember that you can always choose not to be notified about new or edited downloads by changing the appropriate setting in your user profile.
+Пам\'ятайте, що ви завжди можете відмовитися від повідомлень про нові або змінені завантаження, змінивши відповідне налаштування у своєму профілі користувача.
 
 {{ EMAIL_SIG }}

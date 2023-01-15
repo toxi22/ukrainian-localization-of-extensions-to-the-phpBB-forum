@@ -1,13 +1,13 @@
-Subject: New Status for Bug Report on {{ SITENAME }}
+Subject: Новий статус звіту про помилку на {{ SITENAME }}
 
-Hello {{ USERNAME }},
+Привіт, {{ USERNAME }} !
 
-You are receiving this email because the status of your bug report "{{ REPORT_TITLE }}" on "{{ SITENAME }}" has changed.
-New Status: {{ STATUS }}.
+Ви отримали цей електронний лист, оскільки статус звіту про помилку "{{ REPORT_TITLE }}" на форумі "{{ SITENAME }}" було змінено.
+Новий статус: {{ STATUS }}.
 
 {{ STATUS_TEXT }}
 
-For more details please follow this link:
+Для отримання більш детальної інформації перейдіть за цим посиланням:
 
 {{ U_BUG_REPORT }}
 
