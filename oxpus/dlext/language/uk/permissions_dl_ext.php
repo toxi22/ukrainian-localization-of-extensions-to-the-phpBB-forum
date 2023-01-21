@@ -9,7 +9,8 @@
  */
 
 /**
- * Language pack for Extension permissions [English]
+ * Language pack for Extension permissions [Ukrainian] 
+* @copyright Roman Pavlovsky: https://github.com/toxi22/ukrainian-localization-of-extensions-to-the-phpBB-forum
  */
 
 /**
