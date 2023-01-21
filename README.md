@@ -2,6 +2,7 @@
 Українська локалізація розширень до форуму phpBB
 
 Список розширень, які перекладені українською мовою:
+
 ger/cmbb: cmBB - Simple Content Management for phpBB ( https://www.phpbb.com/customise/db/extension/cmbb/ )
 
 gsere/telegram: [ABD] Telegram Method for notifications ( https://www.phpbb.com/community/viewtopic.php?t=2482376 )
