@@ -1,0 +1,59 @@
+{% INCLUDE 'overall_header.html' %}
+
+<a name="maincontent"></a>
+
+<h1>{{ lang('DL_ACP_MANAGEMANT_PAGE') }}</h1>
+
+{% if U_DL_ASSISTANT %}
+
+<form id="dl_assistant" method="post" action="{{ U_DL_ASSISTANT }}">
+	<h2>{{ lang('DL_ASSISTANT_HINT') }}</h2>
+	<fieldset class="dl-grey-bg2">
+		<input class="dl-assistantbtn" type="submit" id="start_assistant" value="{{ lang('DL_ASSISTANT_LINK') }}">
+	</fieldset>
+</form>
+
+{% else %}
+
+<p>{{ lang('DL_ACP_MANAGEMANT_PAGE_EXPLAIN') }}</p>
+
+{% if S_DL_ACP_MAIN_TYPE eq '3.2' %}{% INCLUDE '@oxpus_dlext/dl_overview_2.html' %}{% endif %}
+{% if S_DL_ACP_MAIN_TYPE eq '3.3' %}{% INCLUDE '@oxpus_dlext/dl_overview_3.html' %}{% endif %}
+
+<fieldset>
+	<form id="dl_reset_clicks" method="post" action="{{ U_DL_ACTION }}">
+		<dl>
+			<dt><label for="reset_clicks">{{ lang('DL_KLICKS_RESET') }}</label></dt>
+			<dd><input class="button2" type="submit" id="reset_clicks" name="reset_clicks" value="{{ lang('RUN') }}"></dd>
+		</dl>
+	</form>
+
+	<form id="dl_reset_stats" method="post" action="{{ U_DL_ACTION }}">
+		<dl>
+			<dt><label for="reset_stats">{{ lang('DL_STATS_DELETE_ALL') }}</label></dt>
+			<dd><input class="button2" type="submit" id="reset_stats" name="reset_stats" value="{{ lang('RUN') }}"></dd>
+		</dl>
+	</form>
+
+	<form id="dl_reset_cache" method="post" action="{{ U_DL_ACTION }}">
+		<dl>
+			<dt><label for="reset_cache">{{ lang('PURGE_CACHE') }}</label></dt>
+			<dd><input class="button2" type="submit" id="reset_cache" name="reset_cache" value="{{ lang('RUN') }}"></dd>
+		</dl>
+	</form>
+
+	<form id="dl_privacy" method="post" action="{{ U_DL_ACTION }}">
+		<dl>
+			<dt><label for="dl_privacy">{{ lang('DL_PRIVACY_IPS') }}</label></dt>
+			<dd><input class="button2" type="submit" id="dl_privacy_buttom" name="dl_privacy" value="{{ lang('RUN') }}"></dd>
+		</dl>
+	</form>
+</fieldset>
+
+{% INCLUDE 'acp_dl_limits.html' %}
+
+<div class="copyright">{{ DL_MOD_RELEASE }}</div>
+
+{% endif %}
+
+{% INCLUDE 'overall_footer.html' %}

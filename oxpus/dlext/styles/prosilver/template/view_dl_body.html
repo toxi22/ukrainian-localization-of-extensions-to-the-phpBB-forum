@@ -1,0 +1,492 @@
+{% INCLUDE '@oxpus_dlext/helpers/dl_header.html' %}
+
+{% if S_CAT_TRAFFIC %}
+<div class="panel bg3"><div class="inner"><span><strong>{{ DL_CAT_TRAFFIC }}</strong></span></div></div>
+{% endif %}
+
+{% if S_DL_CAT_RULE %}
+<div class="rules"><div class="inner"><span>{{ DL_CAT_RULE }}</span></div></div>
+{% endif %}
+
+<h2 class="dl-left">
+	{% INCLUDE '@oxpus_dlext/helpers/dl_filestatus.html' %}
+	{{ DL_DESCRIPTION }} {{ DL_HACK_VERSION }} 
+	{% INCLUDE '@oxpus_dlext/helpers/dl_miniimg.html' %}
+</h2>
+
+<br>
+
+<div id="search-box" class="search-box dl-right" role="search" style="margin-right: 0.7em;">
+
+	<form action="{{ U_DL_SEARCH }}" method="post" id="news_search">
+
+		<fieldset>
+
+			<input name="search_keywords" id="search_keywords" type="search" maxlength="255" title="{{ lang('DL_SEARCH_DOWNLOAD') }}" class="inputbox search tiny" size="20" value="" placeholder="{{ lang('DL_SEARCH_DOWNLOAD') }}">
+			<button class="button button-search" type="submit" title="{{ lang('SEARCH') }}">
+				<i class="icon fa-search fa-fw" aria-hidden="true"></i><span class="sr-only">{{ lang('SEARCH') }}</span>
+			</button>
+			<a href="{{ U_DL_SEARCH }}" class="button button-search-end" title="{{ lang('SEARCH_ADV') }}">
+				<i class="icon fa-cog fa-fw" aria-hidden="true"></i><span class="sr-only">{{ lang('SEARCH_ADV') }}</span>
+			</a>
+
+		</fieldset>
+
+	</form>
+
+</div>
+
+<div class="clear"></div>
+
+<br>
+
+<div class="action-bar bar-top">
+
+	{% for dl_category in loops.dl_category %}
+	<a id="tab_{{ dl_category.DL_CAT_ID }}" class="button{% if S_DL_OPEN_PANEL == dl_category.DL_CAT_ID %} dl-tab-icon{% endif %} dl-detail-area" data-cat="{{ dl_category.DL_CAT_ID }}" data-open1="{{ DL_MOD_LIST }}" data-close1="{{ DL_MOD_LIST_CLOSE }}" data-icon1="plus" data-colour1="dl-red-icon" data-open2="{{ DL_MOD_FILE_HASH_OPEN }}" data-close2="{{ DL_MOD_FILE_HASH_CLOSE }}" data-icon2="slack" data-colour2="dl-red-icon">
+		<span>{{ dl_category.DL_CAT_NAME }}</span>
+		{% if dl_category.DL_COMMENTS_COUNT and dl_category.DL_CAT_ID eq '2' %}
+		<i class="dl-bubble">{{ dl_category.DL_COMMENTS_COUNT }}</i>
+		{% endif %}
+		<i class="button2" aria-hidden="true"></i>
+	</a>
+	{% endfor %}
+
+</div>
+
+{% if S_DL_BROKEN_CUR %}<div class="panel dl-red dl-big dl-text-center dl-reported"><strong>{{ lang('DL_BROKEN_CUR') }}</strong></div>{% endif %}
+
+<div class="panel dlext{% if S_DL_OPEN_PANEL <> 0 %} noshow{% endif %}{% if DL_BROKEN %} dl-reported{% endif %}" id="options0">
+	<div class="inner">
+
+		<div class="postbody dl-width-100">
+
+			<div class="post-buttons">
+
+				{% if S_DL_EDIT_THUMBS %}
+				<a href="{{ U_DL_EDIT_THUMBS }}" class="button icon-button" title="{{ lang('DL_EDIT_THUMBS') }}">
+					<i class="icon fa-photo fa-fw" aria-hidden="true"></i><span class="sr-only">{{ lang('DL_EDIT_THUMBS') }}</span>
+				</a>
+				{% endif %}
+
+				{% if S_DL_EDIT_BUTTON %}
+				<a href="{{ U_DL_EDIT }}" class="button icon-button" title="{{ lang('DL_EDIT_FILE') }}">
+					<i class="icon fa-edit fa-fw" aria-hidden="true"></i><span class="sr-only">{{ lang('DL_EDIT_FILE') }}</span>
+				</a>
+				{% endif %}
+
+				{% if S_DL_REPORT_BROKEN %}
+				<a href="{{ U_DL_BROKEN_DOWNLOAD }}" class="button icon-button" title="{{ lang('DL_BROKEN') }}">
+					<i class="icon fa-exclamation fa-fw" aria-hidden="true"></i><span class="sr-only">{{ lang('DL_BROKEN') }}</span>
+				</a>
+				{% endif %}
+
+				{% if S_DL_BROKEN_MOD %}
+				<a href="{{ U_DL_REPORT }}" class="button icon-button" title="{{ lang('DL_BROKEN_MOD') }}">
+					<i class="icon fa-exclamation fa-fw dl-red-icon" aria-hidden="true"></i><span class="sr-only">{{ lang('DL_BROKEN_MOD') }}</span>
+				</a>
+				{% endif %}
+
+				{% if S_DL_FAV_BLOCK %}
+				<a href="{{ U_DL_FAVORITE }}" class="button icon-button" title="{{ DL_FAVORITE }}">
+					<i class="icon fa-bookmark{% if not S_DL_FAV_ACTIVE %}-o{% endif %} fa-fw{% if DL_FAVORITE_COLOR %} dl-green-icon{% endif %}" aria-hidden="true"></i><span class="sr-only">{{ DL_FAVORITE }}</span>
+				</a>
+				{% endif %}
+
+			</div>
+
+			<div class="content">{{ DL_LONG_DESC }}</div>
+
+		</div>
+
+	</div>
+
+	<br>
+
+	<div class="panel dl-width-50 dl-left dlext3">
+
+		<h3>{{ lang('DL_DETAIL') }}</h3>
+
+		<fieldset>
+
+			<dl>
+				<dt><label>{{ lang('DL_FILE_NAME') }}</label></dt>
+				<dd class="lastpost dl-cell-block"><label>{{ DL_FILE_NAME }}</label></dd>
+			</dl>
+
+			{% if S_DL_REAL_FILETIME %}
+			<dl>
+				<dt><label>{{ lang('DL_REAL_FILETIME') }}</label></dt>
+				<dd class="lastpost dl-cell-block"><label><time datetime="{{ DL_REAL_FILETIME_RFC }}">{{ DL_REAL_FILETIME }}</time></label></dd>
+			</dl>
+			{% endif %}
+
+			{% if S_DL_HACKLIST and DL_HACK_AUTHOR %}
+			<dl>
+				<dt><label>{{ lang('DL_HACK_AUTOR') }}</label></dt>
+				<dd class="lastpost dl-cell-block">
+					<label>
+						{% if DL_HACK_AUTHOR_MAIL %}<a href="mailto:{{ DL_HACK_AUTHOR_MAIL }}">{% endif %}{{ DL_HACK_AUTHOR }}{% if DL_HACK_AUTHOR_MAIL %}</a>{% endif %}
+						{% if DL_HACK_AUTHOR_WEBSITE %}&nbsp;[ <a href="{{ DL_HACK_AUTHOR_WEBSITE }}">{{ lang('WEBSITE') }}</a> ]{% endif %}
+					</label>
+				</dd>
+			</dl>
+			{% endif %}
+
+			{% if S_DL_BUG_TRACKER %}
+			<dl>
+				<dt><label>{{ lang('DL_BUG_TRACKER') }}</label></dt>
+				<dd class="lastpost dl-cell-block"><label><a href="{{ U_DL_FILE_TRACKER }}">{{ lang('DL_BUG_TRACKER_FILE') }}</a></label></dd>
+			</dl>
+			{% endif %}
+
+			{% if S_DL_SHOW_TOPIC_LINK %}
+			<dl>
+				<dt><label>{{ lang('TOPIC') }}</label></dt>
+				<dd class="lastpost dl-cell-block"><label><a href="{{ U_DL_TOPIC }}">{{ lang('VIEW_TOPIC') }}</a></label></dd>
+			</dl>
+			{% endif %}
+
+			<dl>
+				<dt><label>{{ lang('DL_FILE_SIZE') }}</label></dt>
+				<dd class="lastpost dl-cell-block"><label>{{ DL_FILE_SIZE }}</label></dd>
+			</dl>
+			{% if U_TEAM and not S_IS_BOT %}
+			<dl>
+				<dt><label>{{ lang('DL_KLICKS') }} / {{ lang('DL_OVERALL_KLICKS') }}</label></dt>
+				<dd class="lastpost dl-cell-block"><label>{{ DL_FILE_KLICKS }} / {{ DL_FILE_OVERALL_KLICKS }}</label></dd>
+			</dl>
+			{% endif %}
+			{% if S_DL_HACKLIST and DL_HACK_DL_URL %}
+			<dl>
+				<dt><label>{{ lang('DL_HACK_DL_URL') }}</label></dt>
+				<dd class="lastpost dl-cell-block"><label><a href="{{ DL_HACK_DL_URL }}">{{ lang('DL_DOWNLOAD') }}</a></label></dd>
+			</dl>
+			{% endif %}
+
+			{% if S_DL_ENABLE_RATE %}
+			<dl>
+				<dt><label>{{ lang('DL_RATING') }}</label></dt>
+				<dd class="lastpost dl-cell-block">
+					{% for downloads in loops.downloads %}
+					{% INCLUDE '@oxpus_dlext/helpers/dl_rating.html' %}
+					{% endfor %}
+				</dd>
+			</dl>
+			{% endif %}
+
+			{% EVENT oxpus_dlext_details_file_append %}
+
+		</fieldset>
+
+	</div>
+
+	<div class="clearfix"></div>
+
+	<div class="notice dl-text-center">{{ DL_ADD_USER }} {{ DL_CHANGE_USER }}&nbsp;&bull;{{ DL_LAST_TIME }}</div>
+
+</div>
+
+{% for dl_thumbnail in loops.dl_thumbnail %}
+{% if dl_thumbnail.S_FIRST_ROW %}
+<div class="panel dlext{% if S_DL_DISPLAY_COMMENTS %} noshow{% endif %}" id="optionst">
+
+	<ul class="dl-detail-row">
+{% endif %}
+		{% if S_DL_POPUPIMAGE %}
+		<li class="dl-left dl-margin-right-small">
+			<a href="{{ dl_thumbnail.DL_THUMBNAIL_LINK }}" title="{{ dl_thumbnail.DL_THUMBNAIL_NAME }}" rel="prettyPhoto[pp_gal]">
+				<img src="{{ dl_thumbnail.DL_THUMBNAIL_PIC }}" alt="{{ dl_thumbnail.DL_THUMBNAIL_NAME }}" title="{{ dl_thumbnail.DL_THUMBNAIL_NAME }}" class="dl-thumb-box">
+			</a>
+		</li>
+		{% else %}
+		<img src="{{ dl_thumbnail.DL_THUMBNAIL_PIC }}" alt="{{ dl_thumbnail.DL_THUMBNAIL_NAME }}" title="{{ dl_thumbnail.DL_THUMBNAIL_NAME }}" class="dl-thumb-box">
+		{% endif %}
+{% if dl_thumbnail.S_LAST_ROW %}
+	</ul>
+
+	<div class="clear"></div>
+
+</div>
+{% endif %}
+{% endfor %}
+
+{% if DL_VER_TAB %}
+<div class="panel dlext{% if S_DL_OPEN_PANEL <> 1 %} noshow{% endif %}" id="options1">
+
+	{% for dl_ver_cell in loops.dl_ver_cell %}
+	{% if dl_ver_cell.S_ROW_COUNT is even %}
+	<dl>
+	{% endif %}
+		<dt class="dl-width-50 dl-left">
+			<div class="postbody dl-width-90">
+				<ul class="post-buttons">
+					<li class="dl-right">
+						<a href="{{ dl_ver_cell.U_DL_VERSION }}" title="{{ lang('DL_DETAIL') }}" class="button button-icon-only">
+							<i class="icon fa-info fa-fw" area-hidden="true"></i><span>{{ lang('DL_DETAIL') }}</span>
+						</a>
+					</li>
+					{% if dl_ver_cell.S_DL_USER_PERM %}
+					<li class="dl-right">
+						<a href="{{ dl_ver_cell.U_DL_VERSION_EDIT }}" title="{{ lang('DL_EDIT_FILE') }}" class="button button-icon-only">
+							<i class="icon fa-pencil fa-fw" area-hidden="true"></i><span>{{ lang('DL_EDIT_FILE') }}</span>
+						</a>
+					</li>
+					{% endif %}
+				</ul>
+				<div><a href="{{ dl_ver_cell.U_DL_VERSION }}" class="forumtitle">{{ dl_ver_cell.DL_VER_TITLE }}</a>
+				{% if not dl_ver_cell.DL_VER_ACTIVE and dl_ver_cell.S_DL_USER_PERM %}
+				&nbsp;<span class="dl-red small"> &raquo; {{ lang('DL_NOT_ACTIVE') }} &laquo; </span>
+				{% endif %}
+				</div>
+				<div><time datetime="{{ dl_ver_cell.DL_VER_TIME_RFC }}">{{ dl_ver_cell.DL_VER_TIME }}</time></div>
+				<div class="content">{{ dl_ver_cell.DL_VER_DESC }} </div>
+			</div>
+		</dt>
+	{% if dl_ver_cell.S_ROW_COUNT is not even or dl_ver_cell.S_LAST_ROW %}
+		<dd class="dl-version-row-end"></dd>
+	</dl>
+	{% endif %}
+	{% endfor %}
+
+</div>
+{% endif %}
+
+{% if S_DL_COMMENTS_TAB %}
+<div class="panel dlext{% if S_DL_OPEN_PANEL <> 2 %} noshow{% endif %}" id="options2">
+
+	{% if S_DL_POST_COMMENT %}
+	<h3>{{ lang('DL_COMMENT_WRITE') }}</h3>
+
+	<form action="{{ S_DL_COMMENT_POST_ACTION }}" method="post" id="postform" onsubmit="return checkQuickForm(this)">
+
+	<div class="post" id="postingbox">
+		<div class="inner">
+
+			<fieldset>
+				<div>{% INCLUDE 'posting_buttons.html' %}</div>
+				{% if loops.smiley|length %}
+				<div id="smiley-box" class="smiley-box">
+					<strong>{{ lang('SMILIES') }}</strong><br>
+					{% for smiley in loops.smiley %}
+						<a href="#" class="dl-smiley-insert" data-smiley="{{ smiley.A_SMILEY_CODE }}"><img src="{{ smiley.SMILEY_IMG }}" width="{{ smiley.SMILEY_WIDTH }}" height="{{ smiley.SMILEY_HEIGHT }}" alt="{{ smiley.SMILEY_CODE }}" title="{{ smiley.SMILEY_DESC }}"></a>
+					{% endfor %}
+					<br><a href="#" class="dl-smiley-popup" data-url="{{ U_DL_MORE_SMILIES }}">{{ lang('MORE_SMILIES') }}</a>
+				</div>
+				{% endif %}
+				<br>
+				<div id="message-box" class="message-box">
+					<textarea name="message" id="message" rows="5" cols="76" tabindex="3" class="dl-comment-height inputbox autowidth">{{ DL_COMMENT_TEXT }}</textarea>
+				</div>
+			</fieldset>
+
+			<fieldset class="submit-buttons">
+				<input type="submit" name="post" value="{{ lang('SUBMIT') }}" class="button icon-button">
+				{{ S_FORM_TOKEN_COMMENT }}
+				{{ S_DL_HIDDEN_POST_FIELDS }}
+			</fieldset>
+		</div>
+
+	</div>
+
+	</form>
+
+	<br>
+	{% endif %}
+
+	{% for dl_comment_row in loops.dl_comment_row %}
+	{% if dl_comment_row.S_FIRST_ROW %}
+	<h3>{{ lang('DL_COMMENTS') }}</h3>
+	{% endif %}
+
+	<div class="dl-edit-box-medium panel">
+		<div class="inner">
+
+			<div class="posts">
+				<div class="inner">
+
+				<div class="postbody">
+
+					{% for dl_action_button in dl_comment_row.dl_action_button %}
+					<ul class="post-buttons">
+						<li><a class="button button-icon-only" href="{{ dl_comment_row.U_DL_EDIT_COMMENT }}" title="{{ lang('EDIT_POST') }}"><i class="icon fa-pencil fa-fw" aria-hidden="true"></i><span>{{ lang('EDIT_POST') }}</span></a></li>
+						<li><a class="button button-icon-only" href="{{ dl_comment_row.U_DL_DELETE_COMMENT }}" title="{{ lang('DELETE_POST') }}"><i class="icon fa-times fa-fw" aria-hidden="true"></i><span>{{ lang('DELETE') }}</span></a></li>
+						<li><a class="button button-icon-only" href="#postingbutton" onclick="addquote({{ dl_comment_row.DL_ID }}, '{{ dl_comment_row.DL_POSTER_NAME }}', '{{ lang('LA_WROTE') }}', {time:{dl_comment_row.DL_POST_TIME_RAW},user_id:{dl_comment_row.DL_POSTER_ID}});" title="{{ lang('QUOTE') }} {{ dl_comment_row.DL_POSTER_NAME }}"><i class="icon fa-quote-left fa-fw" aria-hidden="true"></i><span>{{ lang('QUOTE') }}</span></a></li>
+					</ul>
+					{% endfor %}
+
+					<div class="author">
+						{% if dl_comment_row.DL_EDITED_BY %}
+						<span><i class="icon fa-file fa-fw icon-lightgray icon-md" aria-hidden="true"></i><span class="sr-only">{{ lang('POST_BY_AUTHOR') }}</span></span>
+						<div class="notice">{{ lang ('POST_BY_AUTHOR') }}{{ dl_comment_row.DL_EDITED_BY }}</div>
+						{% endif %}
+						{{ dl_comment_row.DL_POSTER }} &raquo; <span class="small"><time datetime="{{ dl_comment_row.DL_POST_TIME_RFC }}">{{ dl_comment_row.DL_POST_TIME }}</time></span>
+					</div>
+
+					<div class="content">{{ dl_comment_row.DL_MESSAGE }}</div>
+					<div id="message_{{ dl_comment_row.DL_ID }}" style="display: none;">{{ dl_comment_row.DL_DECODED_TEXT }}</div>
+
+				</div>
+
+				<dl class="postprofile">
+					<dt>
+						<div class="avatar-container">{{ dl_comment_row.DL_POSTER_AVATAR }}</div>
+					</dt>
+				</dl>
+
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+	{% endfor %}
+
+	{% if loops.pagination|length or DL_TOTAL_DL %}
+	<div class="pagination">
+		{{ DL_TOTAL_DL }}
+		{% if loops.pagination|length %}
+			{% INCLUDE 'pagination.html' %}
+		{% else %}
+			&bull; {{ DL_PAGE_NUMBER }}
+		{% endif %}
+	</div>
+
+	<br><br>
+	{% endif %}
+
+</div>
+{% endif %}
+
+{% if S_DL_DETAIL_EXTRA_TAB %}
+<div class="panel dlext{% if S_DL_OPEN_PANEL != 3 %} noshow{% endif %}" id="options3">
+	<div class="tablewrap">
+
+		{% if DL_MOD_WARNING %}
+		<div class="rules"><strong>{{ lang('DL_MOD_WARNING') }}</strong><br>{{ DL_MOD_WARNING }}</div>
+		{% endif %}
+
+		{% if DL_MOD_TEST %}
+		<br>
+		<h3>{{ lang('DL_MOD_TEST') }}</h3>
+		<p>{{ DL_MOD_TEST }}</p>
+		{% endif %}
+
+		{% if DL_MOD_REQUIRE %}
+		<br>
+		<h3>{{ lang('DL_MOD_REQUIRE') }}</h3>
+		<p>{{ DL_MOD_REQUIRE }}</p>
+		{% endif %}
+
+		{% if S_DL_MOD_TODO %}
+		<br>
+		<h3>{{ lang('DL_MOD_TODO') }}</h3>
+		<p>{{ DL_MOD_TODO }}</p>
+		{% endif %}
+
+		{% if DL_MOD_DESC %}
+		<br>
+		<h3>{{ lang('DL_MOD_DESC') }}</h3>
+		<p>{{ DL_MOD_DESC }}</p>
+		{% endif %}
+
+		{% for dl_custom_fields in loops.dl_custom_fields %}
+		{% if dl_custom_fields.S_FIRST_ROW %}
+		<br>
+		{% endif %}
+		<h3>{{ dl_custom_fields.DL_FIELD_NAME }}{{ lang('COLON') }}</h3>
+		<p>{{ dl_custom_fields.DL_FIELD_VALUE }}</p>
+		<br>
+		{% endfor %}
+
+	</div>
+
+</div>
+{% endif %}
+
+{% if S_DL_DETAIL_HASH_TAB %}
+<div class="panel dlext{% if S_DL_OPEN_PANEL <> 4 %} noshow{% endif %}" id="options4">
+
+	<h3>{{ lang('DL_MOD_FILE_HASH_TABLE') }}</h3>
+
+	<div class="tablewrap">
+		<table class="table1">
+			{% for dl_hash_row in loops.dl_hash_row %}
+			<tr class="row">
+				<td><label><strong>{{ dl_hash_row.DL_VERSION }}</strong></label></td>
+				<td>{{ dl_hash_row.DL_FILE_NAME }}</td>
+				<td>[{{ dl_hash_row.DL_HASH_METHOD }}] {{ dl_hash_row.DL_HASH }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</div>
+
+</div>
+{% endif %}
+
+{% EVENT oxpus_dlext_details_append_options_page %}
+
+<div class="clearfix"></div>
+
+{% if S_DL_BUTTON %}
+<br>
+
+<div id="dl_mod_button">
+
+	<form action="{{ U_DL_DOWNLOAD }}" method="post" name="download" id="download"{% if S_DL_WINDOW %} target="_blank"{% endif %}>
+
+	<ul class="linklist navlinks">
+		{% if S_DL_VC %}
+		<li class="dlbutton1">
+		{% if DL_CAPTCHA_TEMPLATE %}
+			{% DEFINE CAPTCHA_TAB_INDEX = 8 %}
+			{% INCLUDE ''~ DL_CAPTCHA_TEMPLATE ~'' %}
+		{% endif %}
+		</li>
+		{% endif %}
+		<li class="dlbutton2">
+			<div>
+				{% if S_DL_VERSION == 0 %}
+				<input type="hidden" name="file_version" value="0">
+				{% else %}
+				<select name="file_version">
+					<option value="0" selected>{{ lang('DL_VERSION_CURRENT') }}</option>
+					{% for dl_version_select in loops.dl_version_select %}
+					<option value="{{ dl_version_select.DL_VALUE }}">{{ dl_version_select.DL_KEY }}</option>
+					{% endfor %}
+				</select>
+				{% endif %}
+				{% if S_DL_AUTOADD_FAV %}
+				<br>
+				<input type="checkbox" name="dl_add_fav" id="dl_add_fav" value="1">&nbsp;<label for="dl_add_fav"><strong>{{ lang('DL_AUTO_ADD_FAV_ONE') }}</strong></label>
+				{% endif %}
+				<br>
+				<input type="submit" name="submit" id="submit" class="downloadbtn" value="{{ lang('DL_DOWNLOAD') }}">
+				{{ S_DL_HIDDEN }}{{ S_FORM_TOKEN_DOWNLOAD }}
+			</div>
+			{% if S_DL_TRAFFICFREE_DL %}<div class="small dl-text-center dl-red">{{ lang('DL_CAN_DOWNLOAD_TRAFFIC') }}</div>{% endif %}
+		</li>
+	</ul>
+
+	</form>
+
+</div>
+<div id="dl_hint" class="noshow dl-right dl-big dl-red">{{ lang('DL_IN_PROGRESS') }}</div>
+{% else %}
+<div class="rules">
+	<div class="inner">
+		<span>{{ lang('DL_NO_ACCESS') }}</span>
+	</div>
+</div>
+{% endif %}
+
+{% for dl_similar_dl in loops.dl_similar_dl %}
+{% if dl_similar_dl.S_FIRST_ROW %}
+<br>
+<h3>{{ lang('DL_SIMILAR_DL') }}</h3>
+{% endif %}
+<a href="{{ dl_similar_dl.U_DL_DOWNLOAD }}">{{ dl_similar_dl.DL_DOWNLOAD }}</a>
+{% if dl_similar_dl.S_LAST_ROW %}<br><br>{% else %}&nbsp;&bull;&nbsp;{% endif %}
+{% endfor %}
+
+{% INCLUDE '@oxpus_dlext/helpers/dl_footer.html' %}

@@ -1,0 +1,286 @@
+services:
+    oxpus.dlext.acp_assistant_controller:
+        class: oxpus\dlext\controller\acp\acp_assistant_controller
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@cache'
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@filesystem'
+            - '@oxpus.dlext.core.extra'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_auth%'
+            - '%oxpus.dlext.tables.dl_cat_traf%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.acp_cat_edit_controller:
+        class: oxpus\dlext\controller\acp\acp_cat_edit_controller
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@cache'
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@filesystem'
+            - '@oxpus.dlext.core.extra'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_auth%'
+            - '%oxpus.dlext.tables.dl_cat_traf%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.acp_categories_controller:
+        class: oxpus\dlext\controller\acp\acp_categories_controller
+        public: true
+        arguments:
+            - '@cache'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@dispatcher'
+            - '@notification_manager'
+            - '@filesystem'
+            - '@oxpus.dlext.core.extra'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.nav'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_auth%'
+            - '%oxpus.dlext.tables.dl_cat_traf%'
+            - '%oxpus.dlext.tables.dl_comments%'
+            - '%oxpus.dlext.tables.dl_stats%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.acp_config_controller:
+        class: oxpus\dlext\controller\acp\acp_config_controller
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@config'
+            - '@config_text'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@cache'
+            - '@oxpus.dlext.core.extra'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_ratings%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+    oxpus.dlext.acp_ext_blacklist_controller:
+        class: oxpus\dlext\controller\acp\acp_ext_blacklist_controller
+        public: true
+        arguments:
+            - '@cache'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_ext_blacklist%'
+    oxpus.dlext.acp_fields_controller:
+        class: oxpus\dlext\controller\acp\acp_fields_controller
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@ext.manager'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@oxpus.dlext.fields.fields'
+            - '@oxpus.dlext.fields.admin'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_fields%'
+            - '%oxpus.dlext.tables.dl_fields_data%'
+            - '%oxpus.dlext.tables.dl_fields_lang%'
+            - '%oxpus.dlext.tables.dl_lang%'
+    oxpus.dlext.acp_files_controller:
+        class: oxpus\dlext\controller\acp\acp_files_controller
+        public: true
+        arguments:
+            - '@cache'
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@dispatcher'
+            - '@notification_manager'
+            - '@filesystem'
+            - '@oxpus.dlext.core.extra'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.topic'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_comments%'
+            - '%oxpus.dlext.tables.dl_favorites%'
+            - '%oxpus.dlext.tables.dl_fields_data%'
+            - '%oxpus.dlext.tables.dl_images%'
+            - '%oxpus.dlext.tables.dl_notraf%'
+            - '%oxpus.dlext.tables.dl_ratings%'
+            - '%oxpus.dlext.tables.dl_stats%'
+            - '%oxpus.dlext.tables.dl_ver_files%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.acp_files_edit_controller:
+        class: oxpus\dlext\controller\acp\acp_files_edit_controller
+        public: true
+        arguments:
+            - '@request'
+            - '@template'
+            - '@oxpus.dlext.core.download'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.constants'
+    oxpus.dlext.acp_overview_controller:
+        class: oxpus\dlext\controller\acp\acp_overview_controller
+        public: true
+        arguments:
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@cache'
+            - '@oxpus.dlext.core.counter'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.privacy'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_stats%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+    oxpus.dlext.acp_perm_check_controller:
+        class: oxpus\dlext\controller\acp\acp_perm_check_controller
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@config'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@auth'
+            - '@user'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.constants'
+    oxpus.dlext.acp_permissions_controller:
+        class: oxpus\dlext\controller\acp\acp_permissions_controller
+        public: true
+        arguments:
+            - '@cache'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@oxpus.dlext.core.extra'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_auth%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.acp_stats_controller:
+        class: oxpus\dlext\controller\acp\acp_stats_controller
+        public: true
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@pagination'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_stats%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.acp_toolbox_controller:
+        class: oxpus\dlext\controller\acp\acp_toolbox_controller
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '@cache'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@ext.manager'
+            - '@dbal.conn'
+            - '@log'
+            - '@user'
+            - '@dispatcher'
+            - '@notification_manager'
+            - '@filesystem'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_images%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.acp_traffic_controller:
+        class: oxpus\dlext\controller\acp\acp_traffic_controller
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@template'
+            - '@dbal.conn'
+            - '@log'
+            - '@cache'
+            - '@user'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.constants'

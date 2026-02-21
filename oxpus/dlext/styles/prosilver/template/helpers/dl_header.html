@@ -1,0 +1,15 @@
+{% INCLUDE 'overall_header.html' %}
+
+{% if S_DL_MOD_OFFLINE_ADMINS %}
+<div class="rules">
+	<div class="inner">
+		<strong>{{ lang('DL_OFF_MESSAGE_ADMIN') }}</strong>
+	</div>
+</div>
+{% endif %}
+
+{% EVENT oxpus_dlext_header_append %}
+
+{% if DL_ACTION_MODE %}
+<div class="panel-container dl-width-100">
+{% endif %}

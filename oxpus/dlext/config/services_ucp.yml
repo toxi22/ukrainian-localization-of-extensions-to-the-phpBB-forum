@@ -1,0 +1,42 @@
+services:
+    oxpus.dlext.ucp_config_controller:
+        class: oxpus\dlext\controller\ucp\ucp_config_controller
+        public: true
+        arguments:
+            - '@request'
+            - '@dbal.conn'
+            - '@user'
+            - '@language'
+            - '@config'
+            - '@template'
+            - '@dispatcher'
+            - '@oxpus.dlext.helpers.constants'
+    oxpus.dlext.ucp_favorite_controller:
+        class: oxpus\dlext\controller\ucp\ucp_favorite_controller
+        public: true
+        arguments:
+            - '@request'
+            - '@dbal.conn'
+            - '@user'
+            - '@language'
+            - '@template'
+            - '@controller.helper'
+            - '@notification_manager'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.nav'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_favorites%'
+            - '%oxpus.dlext.tables.downloads%'
+    oxpus.dlext.ucp_privacy_controller:
+        class: oxpus\dlext\controller\ucp\ucp_privacy_controller
+        public: true
+        arguments:
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@dbal.conn'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_tracker%'
+            - '%oxpus.dlext.tables.dl_comments%'
+            - '%oxpus.dlext.tables.dl_stats%'

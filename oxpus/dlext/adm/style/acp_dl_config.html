@@ -1,0 +1,64 @@
+{% INCLUDE 'overall_header.html' %}
+
+<h1>{{ lang('DL_CONFIG') }}</h1>
+
+<h2>{{ DL_TITLE_PAGE }}</h2>
+
+{% if S_DL_ERROR %}
+<div class="errorbox">
+	<p>{{ DL_ERROR_MSG }}</p>
+</div>
+{% endif %}
+
+<div class="successbox">
+	<p><strong>{{ lang('DL_DOWNLOAD_PATH') }}{{ lang('COLON') }} {{ DL_EXT_FILES_PATH }}</strong></p><p>{{ lang('DL_DOWNLOAD_PATH_EXPLAIN') }}</p>
+</div>
+
+{% INCLUDE 'acp_dl_limits.html' %}
+
+<br>
+
+<form id="mode_select" method="post" action="{{ U_DL_MODE_SELECT }}">
+	<fieldset class="quick">
+		{{ lang('SELECT_FORM') }}{{ lang('COLON') }} <select name="view" class="dl-change-select" data-button="config-mode">{{ S_DL_MODE_SELECT }}</select> <input class="button2" id="config-mode" type="submit" value="{{ lang('GO') }}">
+		{{ S_FORM_TOKEN }}
+	</fieldset>
+</form>
+
+<form id="acp_dl_config" method="post" action="{{ U_DL_ACTION }}">
+
+{% for dl_options in loops.dl_options %}
+	{% if dl_options.S_DL_LEGEND %}
+		{% if not dl_options.S_FIRST_ROW %}
+			</fieldset>
+		{% endif %}
+		<fieldset>
+			<legend>{{ dl_options.DL_LEGEND }}</legend>
+	{% else %}
+
+		<dl>
+			<dt><label for="{{ dl_options.DL_KEY }}">{{ dl_options.DL_TITLE }}{{ lang('COLON') }}</label>{% if dl_options.S_DL_EXPLAIN %}<br><span>{{ dl_options.DL_TITLE_EXPLAIN }}</span>{% endif %}</dt>
+			<dd>
+				{% if dl_options.DL_HELP_KEY %}<a class="help" data-key="{{ dl_options.DL_HELP_KEY }}"><i class="icon fa-question-circle fa-fw"></i></a>{% else %}&nbsp;{% endif %}&nbsp;&nbsp;{{ dl_options.DL_CONTENT }}
+				{% if dl_options.DL_PREVIEW %}<br><br><hr><div class="small">{{ dl_options.DL_PREVIEW }}</div>{% endif %}
+			</dd>
+		</dl>
+
+	{% endif %}
+{% endfor %}
+
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+		{{ S_FORM_TOKEN }}
+		{{ S_DL_HIDDEN_FIELDS }}
+	</fieldset>
+
+</form>
+
+<br>
+
+<fieldset class="submit-buttons">{{ DL_MOD_RELEASE }}</fieldset>
+
+{% INCLUDE 'overall_footer.html' %}

@@ -1,0 +1,438 @@
+{% if S_DL_MCP %}
+{% INCLUDE '@oxpus_dlext/helpers/dl_mcp_header.html' %}
+{% else %}
+{% INCLUDE '@oxpus_dlext/helpers/dl_header.html' %}
+{% endif %}
+
+<h2 style="float: left;">{{ DL_ACTION_MODE }}</h2>
+
+{% if U_DL_GO_BACK %}
+<fieldset class="submit-buttons dl-right">
+	<a href="{{ U_DL_GO_BACK }}" class="button{% if S_DL_MCP %}2{% else %} icon-button{% endif %} dl-a-button">{{ lang('CANCEL') }}</a>
+</fieldset>
+{% endif %}
+
+<br class="clear">
+
+{% if DL_FORMATED_HINT_TEXT %}
+<div class="dl-edit-hint panel dl-edit-box-big">
+	<div class="inner">
+		{{ DL_FORMATED_HINT_TEXT }}
+	</div>
+</div>
+{% endif %}
+
+<div class="dl-unassign rules {% if not S_DL_CAT_UNASSIGNED %}noshow{% endif %}">
+	<div class="inner">
+		<span class="dl-unassign-hint">{{ S_DL_CAT_UNASSIGNED_COUNT }}</span>
+	</div>
+</div>
+
+<form action="{{ S_DL_DOWNLOADS_ACTION }}" method="post" enctype="multipart/form-data" id="dl_edit">
+
+{% if S_DL_VERSION_ON %}
+<div class="dl-edit-version panel dl-edit-box-light">
+	<div class="inner">
+
+	<h3>{{ lang('DL_VERSION') }}</h3>
+
+	<fieldset>
+
+		<dl>
+			<dt><label class="dl-text-adnew">{{ lang('DL_VERSION_ADD_NEW') }}</label></dt>
+			<dd><label><input type="radio" name="file_ver_opt" class="radio" value="0"></label></dd>
+		</dl>
+		<dl>
+			<dt><label class="dl-text-adold">{{ lang('DL_VERSION_ADD_OLD') }}</label></dt>
+			<dd><label><input type="radio" name="file_ver_opt" class="radio" value="1"></label></dd>
+		</dl>
+		<dl>
+			<dt><label class="dl-text-vreplace">{{ lang('DL_VERSION_REPLACE') }}</label></dt>
+			<dd>
+				<input type="radio" name="file_ver_opt" class="radio" value="2" checked> &raquo;
+				<select name="file_version">
+					<option value="0" selected>{{ lang('DL_VERSION_CURRENT') }}</option>
+					{% for dl_version_select in loops.dl_version_select %}
+					<option value="{{ dl_version_select.DL_VALUE }}">{{ dl_version_select.DL_NAME }}</option>
+					{% endfor %}
+				</select>
+				<br>
+				<span class="small">{{ lang('DL_VERSION_REPLACE_EXPLAIN') }}</span>
+			</dd>
+		</dl>
+		{% if S_DL_SELECT_VER_DEL %}<br>
+		<dl>
+			<dt><label class="dl-red">{{ lang('DL_VERSION_DELETE') }}</label></dt>
+			<dd>
+				<input type="radio" name="file_ver_opt" class="radio" value="3"> &raquo;
+				<select name="file_ver_del[]" class="dl-width-75-max" multiple="multiple" size="{{ DL_VERSION_SELECT_SIZE }}">
+					<option value="0" selected>{{ lang('DL_VERSION_CURRENT') }}</option>
+					{% for dl_version_select in loops.dl_version_select %}
+					<option value="{{ dl_version_select.DL_VALUE }}">{{ dl_version_select.DL_NAME }}</option>
+					{% endfor %}
+				</select>
+				<br>
+				<span class="small">{{ lang('DL_VERSION_DELETE_EXPLAIN') }}</span>
+			</dd>
+		</dl>
+		{% endif %}
+
+	</fieldset>
+
+	</div>
+</div>
+{% endif %}
+
+<div class="panel dl-edit-box-light">
+	<div class="inner">
+
+	<h3>{{ lang('DL_DOWNLOAD') }}</h3>
+
+	{% if S_DL_UPLOAD_TRAFFIC %}
+	<div class="rules">
+		<span class="small">
+			{{ lang('DL_UPLOAD_TRAFFIC') }}
+		</span>
+	</div>
+	{% endif %}
+
+	<fieldset>
+
+	<dl>
+		<dt><label>{{ lang('DL_NAME') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_NAME" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="description" size="40" maxlength="255" value="{{ DL_DESCRIPTION }}" class="inputbox autowidth">
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_CAT_NAME') }}</label></dt>
+		<dd>
+			{% if S_DL_CAT_CHOOSE %}
+			<a class="help" data-key="DL_CAT_NAME" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<select name="cat_id" class="dl-select-edit-cat">
+				{% for search_cat_select in loops.search_cat_select %}
+				<option value="{{ search_cat_select.DL_CAT_ID }}"{% if search_cat_select.DL_SELECTED %} selected{% endif %}>{{ search_cat_select.DL_SEPERATOR }}{{ search_cat_select.DL_CAT_NAME }}</option>
+				{% endfor %}
+			</select>
+			{% else %}
+			{{ DL_CAT_NAME }}
+			{% endif %}
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_FILE_DESCRIPTION') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_FILE_DESCRIPTION" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<textarea name="long_desc" rows="4" cols="100" class="inputbox">{{ DL_LONG_DESC }}</textarea>
+		</dd>
+	</dl>
+
+	</fieldset>
+
+	</div>
+</div>
+
+<div class="panel dl-edit-box-light">
+	<div class="inner">
+
+	<fieldset>
+
+	<dl>
+		<dt><label>{{ lang('DL_UPLOAD_FILE') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_UPLOAD_FILE" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="file" name="dl_name" class="inputbox" size="46"><br>
+			<span class="small">{{ DL_MAX_UPLOAD_SIZE }}{{ DL_BLACKLIST_EXPLAIN }}</span>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_EXTERN') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_EXTERN" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="checkbox" class="permissions-checkbox" value="1" name="file_extern"{% if DL_CHECKEXTERN %} checked{% endif %}>
+			<input type="text" name="file_name" class="inputbox autowidth" size="40" value="{{ DL_URL }}">
+			<input type="text" size="10" maxlength="20" name="file_extern_size" value="{{ DL_FILE_EXT_SIZE }}" class="inputbox autowidth">
+			<select name="dl_e_quote">
+				{% for dl_e_quote_select in loops.dl_e_quote_select %}
+				<option value="{{ dl_e_quote_select.DL_VALUE }}"{% if dl_e_quote_select.DL_VALUE eq S_DL_FILE_EXT_SIZE_RANGE %} selected{% endif %}>{{ dl_e_quote_select.DL_LANG }}</option>
+				{% endfor %}
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_HACK_VERSION') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_HACK_VERSION" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="hack_version" size="10" maxlength="32" value="{{ DL_HACK_VERSION }}" class="inputbox autowidth">
+		</dd>
+	</dl>
+	</fieldset>
+
+	</div>
+</div>
+
+{% EVENT oxpus_dlext_download_edit_file_after %}
+
+{% if S_DL_MODCP or S_DL_CHANGE_TIME or S_DL_POPUP_NOTIFY or S_DL_EMAIL_BLOCK %}
+<div class="panel dl-edit-box-light">
+	<div class="inner">
+
+	<fieldset>
+
+	{% if S_DL_MODCP %}
+	<dl>
+		<dt><label>{{ lang('DL_IS_FREE') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_IS_FREE" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<select name="file_free">
+				{% for dl_file_free_select in loops.dl_file_free_select %}
+				<option value="{{ dl_file_free_select.DL_VALUE }}"{% if dl_file_free_select.DL_VALUE eq S_DL_CHECK_FREE %} selected{% endif %}>{{ dl_file_free_select.DL_LANG }}</option>
+				{% endfor %}
+			</select>
+		</dd>
+	</dl>
+	{% if not S_DL_TRAFFIC %}
+	<dl>
+		<dt><label>{{ lang('DL_TRAFFIC') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_TRAFFIC" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="file_traffic" size="10" maxlength="10" value="{{ DL_TRAFFIC }}" class="inputbox autowidth">
+			<select name="dl_t_quote">
+				{% for dl_t_quote_select in loops.dl_t_quote_select %}
+				<option value="{{ dl_t_quote_select.DL_VALUE }}"{% if dl_t_quote_select.DL_VALUE eq S_DL_TRAFFIC_RANGE %} selected{% endif %}>{{ dl_t_quote_select.DL_LANG }}</option>
+				{% endfor %}
+			</select>
+		</dd>
+	</dl>
+	{% endif %}
+	{% endif %}
+
+</fieldset>
+
+	</div>
+</div>
+{% endif %}
+
+{% if S_DL_USE_HACKLIST %}
+<div class="panel dl-edit-box-light">
+	<div class="inner">
+
+	<fieldset>
+
+	<dl>
+		<dt><label>{{ lang('DL_HACKLIST') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_HACKLIST" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<select name="hacklist">
+				{% for dl_hacklist_select in loops.dl_hacklist_select %}
+				<option value="{{ dl_hacklist_select.DL_VALUE }}"{% if dl_hacklist_select.DL_VALUE eq S_DL_HACKLIST %} selected{% endif %}>{{ dl_hacklist_select.DL_LANG }}</option>
+				{% endfor %}
+			</select>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_HACK_AUTOR') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_HACK_AUTOR" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="hack_author" size="40" maxlength="255" value="{{ DL_HACK_AUTHOR }}" class="inputbox autowidth">
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_HACK_AUTOR_EMAIL') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_HACK_AUTOR_EMAIL" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="hack_author_email" size="40" maxlength="255" value="{{ DL_HACK_AUTHOR_EMAIL }}" class="inputbox autowidth">
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_HACK_AUTOR_WEBSITE') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_HACK_AUTOR_WEBSITE" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="hack_author_website" size="40" maxlength="255" value="{{ DL_HACK_AUTHOR_WEBSITE }}" class="inputbox autowidth">
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_HACK_DL_URL') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_HACK_DL_URL" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="hack_dl_url" size="40" maxlength="255" value="{{ DL_HACK_DL_URL }}" class="inputbox autowidth">
+		</dd>
+	</dl>
+
+	</fieldset>
+
+	</div>
+</div>
+{% endif %}
+
+{% if S_DL_ALLOW_EDIT_MOD_DESC or S_DL_TODO_LINK_ONOFF %}
+<div class="panel dl-edit-box-light">
+	<div class="inner">
+
+	<fieldset>
+
+	{% if S_DL_ALLOW_EDIT_MOD_DESC %}
+	<dl>
+		<dt><label>{{ lang('DL_MOD_LIST_SHORT') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_MOD_LIST" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="checkbox" class="permissions-checkbox" name="mod_list" {% if DL_MOD_LIST %}checked{% endif %} value="1">
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_MOD_TEST') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_MOD_TEST" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="test" size="40" maxlength="50" value="{{ DL_MOD_TEST }}" class="inputbox autowidth">
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_MOD_REQUIRE') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_MOD_REQUIRE" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="text" name="require" size="40" maxlength="255" value="{{ DL_MOD_REQUIRE }}" class="inputbox autowidth">
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_MOD_DESC') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_MOD_DESC" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<textarea name="mod_desc" rows="4" cols="100" class="inputbox">{{ DL_MOD_DESC }}</textarea>
+		</dd>
+	</dl>
+	<dl>
+		<dt><label>{{ lang('DL_MOD_WARNING') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_MOD_WARNING" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<textarea name="warning" rows="4" cols="100" class="inputbox">{{ DL_MOD_WARNING }}</textarea>
+		</dd>
+	</dl>
+	{% endif %}
+	{% if S_DL_TODO_LINK_ONOFF %}
+	<dl>
+		<dt><label>{{ lang('DL_MOD_TODO') }}</label></dt>
+		<dd>
+			<a class="help" data-key="DL_MOD_TODO" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<textarea name="todo" rows="4" cols="100" class="inputbox">{{ DL_MOD_TODO }}</textarea>
+		</dd>
+	</dl>
+	{% endif %}
+
+	</fieldset>
+
+	</div>
+</div>
+{% endif %}
+
+{% if not S_DL_TODO_LINK_ONOFF %}
+<div><input type="hidden" name="todo" value="{{ DL_MOD_TODO }}"></div>
+{% endif %}
+
+{% for download_fields in loops.download_fields %}
+{% if download_fields.S_FIRST_ROW %}
+<div class="panel dl-edit-box-light">
+	<div class="inner">
+
+	<fieldset>
+{% endif %}
+
+	<dl>
+		<dt>
+			<label{% if download_fields.FIELD_ID %} for="{{ download_fields.FIELD_ID }}"{% endif %}>{{ download_fields.LANG_NAME }}{{ lang('COLON') }}{% if download_fields.S_REQUIRED %} *{% endif %}</label>
+			{% if download_fields.LANG_EXPLAIN %}
+			<br>
+			<span>{{ download_fields.LANG_EXPLAIN }}</span>
+			{% endif %}
+		</dt>
+		{% if download_fields.ERROR %}
+		<dd class="error">
+			{{ download_fields.ERROR }}
+		</dd>
+		{% endif %}
+		<dd>{{ download_fields.FIELD }}</dd>
+	</dl>
+
+{% if download_fields.S_LAST_ROW %}
+	</fieldset>
+
+	</div>
+</div>
+{% endif %}
+{% endfor %}
+
+<div class="dl-edit-version panel dl-edit-box-light">
+	<div class="inner">
+
+	<h3>{{ lang('OPTIONS') }}</h3>
+
+	<fieldset>
+
+		{% if S_DL_MODCP %}
+	<dl class="navbar dl-edit-box-medium">
+		<dt>
+			<label>{{ lang('DL_APPROVE') }}</label>
+		</dt>
+		<dd>
+			<a class="help" data-key="DL_APPROVE" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="checkbox" class="permissions_checkbox" name="approve" value="1"{% if DL_APPROVE %} checked{% endif %}>
+		</dd>
+	</dl>
+	{% endif %}
+	{% if S_DL_CLICK_RESET %}
+	<dl class="navbar dl-edit-box-medium">
+		<dt>
+			<label>{{ lang('DL_KLICKS_RESET') }}</label>
+		</dt>
+		<dd>
+			<a class="help" data-key="DL_KLICKS_RESET" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="checkbox" class="permissions-checkbox" name="click_reset" value="1">
+		</dd>
+	</dl>
+	{% endif %}
+	{% if S_DL_CHANGE_TIME %}
+	<dl class="navbar dl-edit-box-medium">
+		<dt>
+			<label>{{ lang('DL_NO_CHANGE_EDIT_TIME') }}</label>
+		</dt>
+		<dd>
+			<a class="help" data-key="DL_NO_CHANGE_EDIT_TIME" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="checkbox" class="permissions_checkbox" name="change_time" value="1">
+		</dd>
+	</dl>
+	{% endif %}
+	{% if S_DL_EMAIL_BLOCK %}
+	<dl class="navbar dl-edit-box-medium">
+		<dt>
+			<label>{{ lang('DL_DISABLE_NOTIFY') }}</label>
+		</dt>
+		<dd>
+			<a class="help" data-key="DL_DISABLE_NOTIFY" title="{{ lang('INFORMATION') }}"><i class="icon fa-question-circle fa-fw"></i></a>
+			<input type="checkbox" class="permissions_checkbox" name="send_notify" value="1">
+		</dd>
+	</dl>
+	{% endif %}
+
+	</fieldset>
+
+	</div>
+</div>
+
+<fieldset class="submit-buttons dl-right">
+	<input type="submit" name="submit" value="{{ lang('SUBMIT') }}" class="button{% if S_DL_MCP %}1{% else %} icon-button{% endif %}">
+	{% if U_DL_GO_BACK %}<a href="{{ U_DL_GO_BACK }}" class="button{% if S_DL_MCP %}2{% else %} icon-button{% endif %} dl-a-button">{{ lang('CANCEL') }}</a>{% endif %}
+</fieldset>
+
+<div class="clear"></div>
+
+<div>{{ S_FORM_TOKEN }}{{ S_DL_HIDDEN_FIELDS }}</div>
+
+</form>
+
+<br>
+
+{% if S_DL_MCP %}
+{% INCLUDE '@oxpus_dlext/helpers/dl_mcp_footer.html' %}
+{% else %}
+{% INCLUDE '@oxpus_dlext/helpers/dl_footer.html' %}
+{% endif %}

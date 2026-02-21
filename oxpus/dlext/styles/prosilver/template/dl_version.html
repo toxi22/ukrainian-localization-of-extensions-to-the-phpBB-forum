@@ -1,0 +1,98 @@
+{% INCLUDE '@oxpus_dlext/helpers/dl_header.html' %}
+
+{% if S_DL_CAT_RULE %}
+<div class="rules">
+	<div class="inner">
+
+	<span>{{ DL_CAT_RULE }}</span>
+
+	</div>
+</div>
+{% endif %}
+
+<h2>
+	{% INCLUDE '@oxpus_dlext/helpers/dl_filestatus.html' %}
+	<label>{{ DL_DESCRIPTION }}
+		{% INCLUDE '@oxpus_dlext/helpers/dl_miniimg.html' %}
+	</label>
+</h2>
+
+<br>
+
+<div class="panel bg1">
+	<div class="tablewrap">
+		<div class="panel">
+
+			<div class="postbody dl-width-100">
+				<h3>{{ lang('DL_HACK_VERSION') }}{{ lang('COLON') }} {{ DL_VER_VERSION }}</h3>
+				{% if not S_DL_ACTIVE %}<br><div class="rules">{{ lang('DL_NOT_ACTIVE') }}</div>{% endif %}
+				{% if U_DL_VER_EDIT %}
+				<ul class="post-buttons">
+					<li class="rightside">
+                        <a href="{{ U_DL_VER_EDIT }}" title="{{ lang('DL_EDIT_FILE') }}" class="button button-icon-only">
+                            <i class="icon fa-pencil fa-fw"></i><span>{{ lang('DL_EDIT_FILE') }}</span>
+                        </a>
+                    </li>
+				</ul>
+				{% endif %}
+				<div class="content">{{ DL_VER_DESC }}</div>
+			</div>
+
+			<div class="notice dl-text-center">
+				<strong>{{ lang('DL_FILE_NAME') }}{{ lang('COLON') }}</strong>
+				{{ DL_FILE_NAME }}
+				{% if DL_FILE_SIZE %}
+				, <strong>{{ lang('DL_FILE_SIZE') }}{{ lang('COLON') }}</strong>
+				{{ DL_FILE_SIZE }}
+				{% endif %}
+			</div>
+
+			{% for images in loops.images %}
+			{% if images.S_FIRST_ROW %}
+			<br>
+			<h3>{{ lang('DL_IMAGES') }}{{ lang('COLON') }}</h3>
+			<dl>
+				<ul class="dl-detail-row">
+			{% endif %}
+					<li class="dl-left dl-thumb-box dl_thumb-cell dl-intent-right">
+						{% if S_DL_POPUPIMAGE %}
+						<a href="{{ images.DL_IMAGE }}" title="{{ images.DL_NAME }}" rel="prettyPhoto[pp_gal]">
+						{% endif %}
+							<img src="{{ images.DL_LINK }}" alt="{{ images.DL_NAME }}" title="{{ images.DL_NAME }}" class="dl-thumb-box">
+						{% if S_DL_POPUPIMAGE %}
+						</a>
+						{% endif %}
+					</li>
+			{% if images.S_LAST_ROW %}
+				</ul>
+			</dl>
+			{% endif %}
+			{% endfor %}
+
+			{% for files in loops.files %}
+			{% if files.S_FIRST_ROW %}
+			<br>
+			<h3>{{ lang('DL_FILES_TITLE') }}{{ lang('COLON') }}</h3>
+			<dl>
+				<ul class="topiclist">
+			{% endif %}
+					<li class="dl-margin-right-small dl-a-button">
+						{% if files.S_DL_AUTH %}
+						<a href="{{ files.DL_LINK }}" title="{{ files.DL_NAME }}">{% endif %}<strong>{{ files.DL_NAME }}</strong>{% if files.S_DL_AUTH %}</a>
+						{% endif %}
+					</li>
+			{% if files.S_LAST_ROW %}
+				</ul>
+			</dl>
+			{% endif %}
+			{% endfor %}
+
+		</div>
+	</div>
+</div>
+
+<div class="clearfix"></div>
+
+<br>
+
+{% INCLUDE '@oxpus_dlext/helpers/dl_footer.html' %}

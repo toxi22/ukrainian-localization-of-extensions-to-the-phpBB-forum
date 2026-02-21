@@ -1,0 +1,84 @@
+{% INCLUDE '@oxpus_dlext/helpers/dl_header.html' %}
+
+<h2>{{ lang('DL_HACKS_LIST') }}</h2>
+
+<br>
+
+{% if loops.pagination|length or DL_TOTAL_DL %}
+	<div class="pagination">
+		{{ DL_TOTAL_DL }}
+		{% if loops.pagination|length %}
+			{% INCLUDE 'pagination.html' %}
+		{% else %}
+			&bull; {{ DL_PAGE_NUMBER }}
+		{% endif %}
+	</div>
+{% endif %}
+
+<div class="forabg">
+	<div class="inner">
+	<ul class="topiclist">
+		<li class="header">
+			<dl>
+				<dd class="dl-width-40 dl-cell-block dl-intent">{{ lang('DL_NAME') }}</dd>
+				<dd class="dl-width-40 dl-cell-block dl-intent">{{ lang('DL_FILE_DESCRIPTION') }}</dd>
+				<dd class="dl-width-20 dl-cell-block dl-intent">{{ lang('DL_HACK_AUTOR') }}</dd>
+			</dl>
+		</li>
+	</ul>
+	<ul class="topiclist topics">
+	{% for dl_listrow in loops.dl_listrow %}
+		<li class="row{% if dl_listrow.S_ROW_COUNT is even %} bg1{% else %} bg2{% endif %}">
+			<dl>
+				<dd class="dl-width-40 dl-cell-block dl-intent"><div class="dl-text-big">{{ dl_listrow.DL_HACK_NAME }}</div><div class="notice">&nbsp;<b>{{ lang('DL_CAT_NAME') }}{{ lang('COLON') }}</b> {{ dl_listrow.DL_CAT_NAME }}</div></dd>
+				<dd class="dl-width-40 dl-cell-block dl-intent">{{ dl_listrow.DL_HACK_DESCRIPTION }}</dd>
+				<dd class="dl-width-20 dl-cell-block dl-intent">
+					{% if dl_listrow.DL_HACK_AUTHOR_MAIL %}<a href="mailto:{{ dl_listrow.DL_HACK_AUTHOR_MAIL }}">{% endif %}{{ dl_listrow.DL_HACK_AUTHOR }}{% if dl_listrow.DL_HACK_AUTHOR_MAIL %}</a>{% endif %}
+					{% if dl_listrow.DL_HACK_AUTHOR_WEBSITE %}<br><a href="{{ dl_listrow.DL_HACK_AUTHOR_WEBSITE }}">{{ lang('DL_HACK_AUTOR_WEBSITE') }}</a>{% endif %}
+					{% if dl_listrow.DL_HACK_DL_URL %}<br><a href="{{ dl_listrow.DL_HACK_DL_URL }}">{{ lang('DL_DOWNLOAD') }}</a>{% endif %}
+				</dd>
+			</dl>
+		</li>
+	{% endfor %}
+	</ul>
+
+	</div>
+</div>
+
+<form action="{{ S_DL_FORM_ACTION }}" method="post" name="hacklist">
+
+<fieldset class="display-options">
+	<label>{{ lang('SORT_BY') }}</label>
+		<label>
+			<select name="sort_by" class="dl-change-select" data-button="dl-select-button">
+				<option value="0"{% if S_DL_SELECTED_DEFAULT %} selected{% endif %}>{{ lang('DL_DEFAULT_SORT') }}</option>
+				<option value="1"{% if S_DL_SELECTED_DESCRIPTION %} selected{% endif %}>{{ lang('DL_FILE_DESCRIPTION') }}</option>
+				<option value="2"{% if S_DL_SELECTED_AUTHOR %} selected{% endif %}>{{ lang('DL_HACK_AUTOR') }}</option>
+			</select>
+		</label>
+		<label>{{ lang('DL_ORDER') }}</label>
+		<label>
+			<select name="order" class="dl-change-select" data-button="dl-select-button">
+				<option value="ASC"{% if S_DL_SELECTED_SORT_ASC %} selected{% endif %}>{{ lang('ASCENDING') }}</option>
+				<option value="DESC"{% if S_DL_SELECTED_SORT_DESC %} selected{% endif %}>{{ lang('DESCENDING') }}</option>
+			</select>
+		</label>
+	<label><input type="submit" class="button2" id="dl-select-button" value="{{ lang('GO') }}"></label>
+</fieldset>
+
+</form>
+
+<hr>
+
+{% if loops.pagination|length or DL_TOTAL_DL %}
+	<div class="pagination">
+		{{ DL_TOTAL_DL }}
+		{% if loops.pagination|length %}
+			{% INCLUDE 'pagination.html' %}
+		{% else %}
+			&bull; {{ DL_PAGE_NUMBER }}
+		{% endif %}
+	</div>
+{% endif %}
+
+{% INCLUDE 'overall_footer.html' %}

@@ -1,0 +1,44 @@
+imports:
+    - { resource: tables.yml }
+    - { resource: services_acp.yml }
+    - { resource: services_controller.yml }
+    - { resource: services_core_fields.yml }
+    - { resource: services_core_helpers.yml }
+    - { resource: services_core.yml }
+    - { resource: services_mcp.yml }
+    - { resource: services_notifications.yml }
+    - { resource: services_tracker.yml }
+    - { resource: services_ucp.yml }
+
+services:
+    oxpus.dlext.listener:
+        class: oxpus\dlext\event\listener
+        public: true
+        arguments:
+            - '@ext.manager'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@request'
+            - '@cache'
+            - '@filesystem'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.privacy'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_cat_traf%'
+            - '%oxpus.dlext.tables.dl_comments%'
+            - '%oxpus.dlext.tables.dl_favorites%'
+            - '%oxpus.dlext.tables.dl_hotlink%'
+            - '%oxpus.dlext.tables.dl_notraf%'
+            - '%oxpus.dlext.tables.dl_reports%'
+            - '%oxpus.dlext.tables.dl_stats%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+        tags:
+            - { name: event.listener }

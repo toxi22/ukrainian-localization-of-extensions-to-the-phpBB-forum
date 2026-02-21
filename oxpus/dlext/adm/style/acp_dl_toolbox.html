@@ -1,0 +1,114 @@
+{% INCLUDE 'overall_header.html' %}
+
+<h1>{{ lang('DL_MANAGE') }}</h1>
+
+<p>{{ lang('DL_MANAGE_EXPLAIN') }}</p>
+
+{% if U_DL_BACK %}
+<p class="quick">
+	<a href="{{ U_DL_BACK }}">&laquo;{{ lang('BACK') }}</a>
+</p>
+{% endif %}
+
+{% INCLUDE 'acp_dl_limits.html' %}
+
+<br>
+
+{% if S_DL_THUMBS %}
+{% INCLUDE '@oxpus_dlext/acp_dl_thumbs.html' %}
+{% else %}
+<form action="{{ S_DL_MANAGE_ACTION }}" method="post" id="create_dir">
+
+<fieldset class="submit-buttons">
+	<a href="{{ U_DL_DOWNLOADS_CHECK_FILES }}" class="button1">{{ lang('DL_CHECK_FILE_SIZES') }}</a>
+	{% if S_DL_THUMBNAIL_CHECK %}&nbsp;<a href="{{ U_DL_DOWNLOADS_CHECK_THUMB }}" class="button1">{{ lang('DL_CHECK_THUMBNAILS') }}</a>{% endif %}
+</fieldset>
+<fieldset class="submit-buttons">
+	{% if S_DL_CREATE_DIR_COMMAND %}<br><input type="submit" name="dircreate" class="button2" value="{{ lang('DL_MANAGE_CREATE_DIR') }}">{{ lang('COLON') }}&nbsp;<input type="text" name="dir_name" size="30" maxlength="200">{% endif %}
+</fieldset>
+
+<fieldset>
+	<strong>
+		{% for dl_toolbox_navi in loops.dl_toolbox_navi %}
+		<a href="{{ dl_toolbox_navi.DL_LINK }}">{{ dl_toolbox_navi.DL_NAME }}</a> /
+		{% endfor %}
+	</strong>
+</fieldset>
+
+<fieldset>
+
+	{% for dirs_row in loops.dirs_row %}
+	<dl>
+		<dt><div class="dl-folder-bg">{{ dirs_row.DL_DIR_LINK }}</div></dt>
+		<dd><label>{{ dirs_row.DL_DIR_DELETE_LINK }}</label></dd>
+	</dl>
+	{% endfor %}
+
+	{% for files_row in loops.files_row %}
+	<dl>
+		<dt class="inner-list">{% if files_row.DL_FILE_EXIST %}<span class="dl-red">{{ lang('DL_UNKNOWN_FILE') }}</span>{% endif %}{{ files_row.DL_FILE_NAME }}</dt>
+		<dd>
+			{% if files_row.DL_FILE_EXIST %}
+			<input type="checkbox" class="permissions-checkbox" name="files[]" value="{{ files_row.DL_FILE_EXIST }}">
+			{% else %}
+			<input type="checkbox" class="permissions-checkbox" value="" disabled="disabled">
+			{% endif %}
+		</dd>
+		<dd><span>{{ files_row.DL_FILE_SIZE }}&nbsp;{{ files_row.DL_FILE_SIZE_RANGE }}{% if files_row.DL_FILE_NAME_REAL %}<br>{{ files_row.DL_FILE_NAME_REAL }}{% endif %}</span></dd>
+	</dl>
+	{% endfor %}
+
+	{% if S_DL_EMPTY_FOLDER %}
+	<p>
+		<span>{{ lang('DL_MANAGE_EMPTY_FOLDER') }}</span>
+	</p>
+	{% endif %}
+
+</fieldset>
+
+{% if S_DL_UNASSIGNED_FILES %}
+<div class="dl-right">
+	<span class="small"><a href="#" class="dl-marklist" data-form="create_dir" data-field="files">{{ lang('MARK_ALL') }}</a> :: <a href="#" class="dl-unmarklist" data-form="create_dir" data-field="files">{{ lang('UNMARK_ALL') }}</a></span>
+</div>
+<br class="clear">
+{% endif %}
+
+{% for overall_size in loops.overall_size %}
+<fieldset>
+
+	<dl>
+		<dt><label>{{ lang('DL_ALL') }}</label></dt>
+		<dd><span>{{ overall_size.DL_OVERALL_SIZE }}&nbsp;{{ overall_size.DL_OVERALL_SIZE_RANGE }}</span></dd>
+	</dl>
+
+</fieldset>
+{% endfor %}
+
+{% if S_DL_FILE_COMMAND %}
+<fieldset>
+
+	<dl>
+		<dt><label>{{ lang('DL_UNASSIGNED_FILES') }}</label></dt>
+		<dd>
+			<select name="file_command">
+				<option value="del">{{ lang('DL_DELETE') }}</option>
+				<option value="---">---------------</option>
+				{% for folder_tree_select in loops.folder_tree_select %}
+				<option value="{{ folder_tree_select.DL_PATH }}">{{ folder_tree_select.DL_TARGET }}</option>
+				{% endfor %}
+			</select>
+			<input type="submit" class="button2" name="file_action" value="{{ lang('DL_GO') }}">
+			{{ S_FORM_TOKEN }}
+		</dd>
+	</dl>
+
+</fieldset>
+{% endif %}
+
+</form>
+
+{% endif %}
+
+<fieldset class="submit-buttons">{{ DL_MOD_RELEASE }}</fieldset>
+
+{% INCLUDE 'overall_footer.html' %}

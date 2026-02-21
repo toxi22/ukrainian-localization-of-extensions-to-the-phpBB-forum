@@ -1,0 +1,344 @@
+services:
+    oxpus.dlext.broken:
+        class: oxpus\dlext\controller\broken
+        public: true
+        arguments:
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@notification_manager'
+            - '@captcha.factory'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.helpers.constants'
+            - '@oxpus.dlext.helpers.footer'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_reports%'
+    oxpus.dlext.details:
+        class: oxpus\dlext\controller\details
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@ext.manager'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@dispatcher'
+            - '@notification_manager'
+            - '@captcha.factory'
+            - '@filesystem'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.comments'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.helpers.constants'
+            - '@oxpus.dlext.helpers.footer'
+            - '@oxpus.dlext.fields.fields'
+            - '%oxpus.dlext.tables.dl_favorites%'
+            - '%oxpus.dlext.tables.dl_hotlink%'
+            - '%oxpus.dlext.tables.dl_images%'
+            - '%oxpus.dlext.tables.dl_notraf%'
+            - '%oxpus.dlext.tables.dl_ratings%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+    oxpus.dlext.fav:
+        class: oxpus\dlext\controller\fav
+        public: true
+        arguments:
+            - '@dbal.conn'
+            - '@controller.helper'
+            - '@request'
+            - '@user'
+            - '%oxpus.dlext.tables.dl_favorites%'
+    oxpus.dlext.feed:
+        class: oxpus\dlext\controller\feed
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.helpers.constants'
+    oxpus.dlext.hacklist:
+        class: oxpus\dlext\controller\hacklist
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@request'
+            - '@config'
+            - '@language'
+            - '@template'
+            - '@controller.helper'
+            - '@pagination'
+            - '@oxpus.dlext.core.hacklist'
+            - '@oxpus.dlext.helpers.footer'
+            - '@oxpus.dlext.helpers.constants'
+    oxpus.dlext.help:
+        class: oxpus\dlext\controller\help
+        public: true
+        arguments:
+            - '@language'
+            - '@request'
+    oxpus.dlext.index:
+        class: oxpus\dlext\controller\index
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@pagination'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@dispatcher'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.helpers.constants'
+            - '@oxpus.dlext.helpers.footer'
+            - '%oxpus.dlext.tables.dl_ratings%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.load:
+        class: oxpus\dlext\controller\load
+        public: true
+        arguments:
+            - '@cache'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@user'
+            - '@language'
+            - '@dispatcher'
+            - '@filesystem'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_cat_traf%'
+            - '%oxpus.dlext.tables.dl_favorites%'
+            - '%oxpus.dlext.tables.dl_hotlink%'
+            - '%oxpus.dlext.tables.dl_notraf%'
+            - '%oxpus.dlext.tables.dl_stats%'
+            - '%oxpus.dlext.tables.dl_versions%'
+            - '%oxpus.dlext.tables.downloads%'
+    oxpus.dlext.overall:
+        class: oxpus\dlext\controller\overall
+        public: true
+        arguments:
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@dispatcher'
+            - '@pagination'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.helpers.footer'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_ratings%'
+    oxpus.dlext.rate:
+        class: oxpus\dlext\controller\rate
+        public: true
+        arguments:
+            - '@dbal.conn'
+            - '@user'
+            - '@config'
+            - '@language'
+            - '@request'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_ratings%'
+            - '%oxpus.dlext.tables.downloads%'
+    oxpus.dlext.search:
+        class: oxpus\dlext\controller\search
+        public: true
+        arguments:
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@dispatcher'
+            - '@pagination'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.extra'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.helpers.footer'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+            - '%oxpus.dlext.tables.dl_images%'
+    oxpus.dlext.stats:
+        class: oxpus\dlext\controller\stats
+        public: true
+        arguments:
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.footer'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_stats%'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.thumbs:
+        class: oxpus\dlext\controller\thumbs
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@language'
+            - '@files.factory'
+            - '@filesystem'
+            - '@user'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.helpers.constants'
+            - '@oxpus.dlext.helpers.footer'
+            - '%oxpus.dlext.tables.dl_images%'
+    oxpus.dlext.todo:
+        class: oxpus\dlext\controller\todo
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@oxpus.dlext.core.extra'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.helpers.footer'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.unassigned:
+        class: oxpus\dlext\controller\unassigned
+        public: true
+        arguments:
+            - '@dbal.conn'
+            - '@language'
+            - '@request'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_cat%'
+    oxpus.dlext.unbroken:
+        class: oxpus\dlext\controller\unbroken
+        public: true
+        arguments:
+            - '@notification_manager'
+            - '@dbal.conn'
+            - '@controller.helper'
+            - '@request'
+            - '@user'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.main'
+            - '%oxpus.dlext.tables.downloads%'
+            - '%oxpus.dlext.tables.dl_reports%'
+    oxpus.dlext.unfav:
+        class: oxpus\dlext\controller\unfav
+        public: true
+        arguments:
+            - '@dbal.conn'
+            - '@controller.helper'
+            - '@request'
+            - '@user'
+            - '@notification_manager'
+            - '@oxpus.dlext.helpers.constants'
+            - '%oxpus.dlext.tables.dl_favorites%'
+    oxpus.dlext.upload:
+        class: oxpus\dlext\controller\upload
+        public: true
+        arguments:
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@language'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.download'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.helpers.footer'
+    oxpus.dlext.version:
+        class: oxpus\dlext\controller\version
+        public: true
+        arguments:
+            - '%core.root_path%'
+            - '%core.php_ext%'
+            - '@dbal.conn'
+            - '@config'
+            - '@controller.helper'
+            - '@request'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@files.factory'
+            - '@filesystem'
+            - '@oxpus.dlext.core.auth'
+            - '@oxpus.dlext.core.files'
+            - '@oxpus.dlext.core.format'
+            - '@oxpus.dlext.core.main'
+            - '@oxpus.dlext.core.physical'
+            - '@oxpus.dlext.core.status'
+            - '@oxpus.dlext.helpers.constants'
+            - '@oxpus.dlext.helpers.footer'
+            - '%oxpus.dlext.tables.dl_ver_files%'
+            - '%oxpus.dlext.tables.dl_versions%'

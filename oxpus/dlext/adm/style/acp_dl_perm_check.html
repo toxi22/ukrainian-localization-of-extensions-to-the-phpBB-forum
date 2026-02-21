@@ -1,0 +1,105 @@
+{% INCLUDE 'overall_header.html' %}
+
+<h1>{{ lang('DL_ACP_PERM_CHECK') }}</h1>
+
+{% if U_BACK %}
+<p class="quick">
+	<a href="{{ U_DL_BACK }}">&laquo;{{ lang('BACK') }}</a>
+</p>
+{% endif %}
+
+<br>
+
+{% INCLUDE 'acp_dl_limits.html' %}
+
+{% if S_DL_DISPLAY_PERMS %}
+
+<h2>{{ lang('USERS') }}{{ lang('COLON') }} {{ DL_CHECK_USERNAME }}</h2>
+
+<br>
+<p><strong>{{ lang('DL_PC_ADMIN') }}{{ lang('COLON') }}</strong> {% if DL_USER_IS_ADMIN %}<strong class="dl-red">{{ lang('YES') }}</strong>{% else %}<span class="dl-green">{{ lang('NO') }}</span>{% endif %}</p>
+
+<table cellspacing="1">
+	<col class="col1"><col class="col2"><col class="col1"><col class="col2">
+<thead>
+<tr>
+	<th>{{ lang('STATISTIC') }}</th>
+	<th>{{ lang('VALUE') }}</th>
+	<th>{{ lang('STATISTIC') }}</th>
+	<th>{{ lang('VALUE') }}</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+    <td>{{ lang('DL_PC_VIEW_STATS') }}{{ lang('COLON') }}</td>
+    <td>{% if DL_USER_CAN_VIEW_STATS %}<strong class="dl-green">{{ lang('YES') }}</strong>{% else %}<span class="dl-red">{{ lang('NO') }}</span>{% endif %}</td>
+    <td>{{ lang('DL_PC_VIEW_TRACKER') }}{{ lang('COLON') }}</td>
+    <td>{% if DL_USER_CAN_SEE_TRACKER %}<strong class="dl-green">{{ lang('YES') }}</strong>{% else %}<span class="dl-red">{{ lang('NO') }}</span>{% endif %}</td>
+</tr>
+<tr>
+    <td>{{ lang('DL_PC_HAVE_TRAFFIC') }}{{ lang('COLON') }}</td>
+    <td>{{ DL_USER_HAVE_TRAFFIC }}</td>
+    <td>{{ lang('DL_PC_HAVE_POSTS') }}{{ lang('COLON') }}</td>
+    <td>{{ DL_USER_HAVE_POSTS }}</td>
+</tr>
+</tbody>
+</table>
+
+<h2>{{ lang('DL_CAT_TITLE') }}</h2>
+
+<table cellspacing="1">
+	<col class="col1"><col class="col2"><col class="col2"><col class="col2"><col class="col2"><col class="col2"><col class="col2">
+<thead>
+<tr>
+	<th>{{ lang('DL_CAT_NAME') }}</th>
+	<th>{{ lang('DL_AUTH_VIEW') }}</th>
+	<th>{{ lang('DL_AUTH_DL') }}</th>
+	<th>{{ lang('DL_AUTH_UP') }}</th>
+    <th>{{ lang('DL_AUTH_MOD') }}</th>
+	<th>{{ lang('DL_AUTH_CREAD') }}</th>
+    <th>{{ lang('DL_AUTH_CPOST') }}</th>
+</tr>
+</thead>
+<tbody>
+{% for dl_cat_row in loops.dl_cat_row %}
+<tr>
+    <td>{{ dl_cat_row.DL_CAT_NAME }}</td>
+	<td>{% if dl_cat_row.DL_CAT_VIEW %}<strong class="dl-green">{{ lang('YES') }}</strong>{% else %}<span class="dl-red">{{ lang('NO') }}</span>{% endif %}</td>
+	<td>{% if dl_cat_row.DL_CAT_DL %}<strong class="dl-green">{{ lang('YES') }}</strong>{% else %}<span class="dl-red">{{ lang('NO') }}</span>{% endif %}</td>
+	<td>{% if dl_cat_row.DL_CAT_UP %}<strong class="dl-green">{{ lang('YES') }}</strong>{% else %}<span class="dl-red">{{ lang('NO') }}</span>{% endif %}</td>
+    <td>{% if dl_cat_row.DL_CAT_MOD %}<strong class="dl-green">{{ lang('YES') }}</strong>{% else %}<span class="dl-red">{{ lang('NO') }}</span>{% endif %}</td>
+	<td>{% if dl_cat_row.DL_CAT_CREAD %}<strong class="dl-green">{{ lang('YES') }}</strong>{% else %}<span class="dl-red">{{ lang('NO') }}</span>{% endif %}</td>
+    <td>{% if dl_cat_row.DL_CAT_CPOST %}<strong class="dl-green">{{ lang('YES') }}</strong>{% else %}<span class="dl-red">{{ lang('NO') }}</span>{% endif %}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+
+{% else %}
+
+<form action="{{ S_DL_FORM_ACTION }}" id="select_user" method="post">
+
+    <fieldset>
+
+        <dl>
+            <dt><label>{{ lang('USERNAME') }}</label></dt>
+            <dd>
+                <input type="text" name="check_user" id="check_user" size="20" maxlength="32" value="">
+                <br>
+                [ <a href="#" class="dl-finduser" data-href="{{ U_DL_FIND_USERNAME }}">{{ lang('FIND_USERNAME') }}</a> ]
+            </dd>
+        </dl>
+
+    </fieldset>
+
+    <fieldset class="quick">
+        <input type="submit" name="submit" value="{{ lang('SUBMIT') }}" class="button1">
+    </fieldset>
+
+    </form>
+
+{% endif %}
+
+<fieldset class="submit-buttons">{{ DL_MOD_RELEASE }}</fieldset>
+
+{% INCLUDE 'overall_footer.html' %}

@@ -1,0 +1,20 @@
+{% import '@phpbb_ads/phpbb_ads_macro.html' as ad %}
+<script>
+	(() => {
+		'use strict';
+
+		const key = 'phpbb_ads_pop_up';
+		const interval_days = 1;
+		const lastShown = localStorage.getItem(key);
+
+		if (!lastShown || Date.now() - +lastShown >= interval_days * 86400000) {
+			localStorage.setItem(key, Date.now());
+			window.addEventListener('load', () => {
+				phpbb.alert(
+					'{{ lang('ADVERTISEMENT')|upper|e('js') }}',
+					`{{ ad.renderAds(AD_POP_UP, AD_POP_UP_ID, AD_POP_UP_CENTER, 'margin: 0;') }}`
+				);
+			});
+		}
+	})();
+</script>

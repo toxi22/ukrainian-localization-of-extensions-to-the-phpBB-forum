@@ -1,0 +1,48 @@
+{% INCLUDE '@oxpus_dlext/helpers/dl_header.html' %}
+
+<h2>
+	{% INCLUDE '@oxpus_dlext/helpers/dl_filestatus.html' %}
+	<label>
+		{{ DL_DESCRIPTION }}{{ DL_HACK_VERSION }}
+		{% INCLUDE '@oxpus_dlext/helpers/dl_miniimg.html' %}
+	</label>
+</h2>
+
+<br>
+
+<div class="panel">
+	<div class="inner">
+
+	<form action="{{ S_DL_CONFIRM_ACTION }}" method="post" id="confirm_broken_dl">
+
+	<fieldset>
+
+		<h3>{{ DL_MESSAGE_TITLE }}</h3>
+
+		<dl>
+			<dt><b>{{ lang('DL_REPORT_REASON') }}{{ lang('COLON') }}</b></dt>
+			<dd><textarea class="inputbox autowidth" rows="5" cols="50" name="report_notify_text"></textarea></dd>
+		</dl>
+		{% if DL_CAPTCHA_TEMPLATE %}
+				{% DEFINE CAPTCHA_TAB_INDEX = 8 %}
+				<br>{{ lang('DL_CONFIRM_EXPLAIN') }}<br><br>
+				{% INCLUDE ''~ DL_CAPTCHA_TEMPLATE ~'' %}
+		{% endif %}
+
+	</fieldset>
+
+	<fieldset class="submit-buttons">
+		<input type="submit" name="submit" value="{{ lang('SUBMIT') }}" class="button icon-button">
+		<input type="submit" name="cancel" value="{{ lang('CANCEL') }}" class="button icon-button">
+		{{ S_FORM_TOKEN }}
+		{{ S_DL_HIDDEN_FIELDS }}
+	</fieldset>
+
+	</form>
+
+	</div>
+</div>
+
+<br>
+
+{% INCLUDE '@oxpus_dlext/helpers/dl_footer.html' %}
