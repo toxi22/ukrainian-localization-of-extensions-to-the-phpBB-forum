@@ -24,6 +24,8 @@ $lang = array_merge($lang, array(
 
 	'ADVERTISEMENT'		=> 'Реклама',
 	'HIDE_AD'			=> 'Приховати рекламу',
+	'PHPBB_ADS_CONSENT_LABEL'		=> 'Реклама',
+	'PHPBB_ADS_CONSENT_DESCRIPTION'	=> 'Рекламні функції, які можуть використовувати файли cookie або аналогічні технології для збору даних.',
 
 	'VISUAL_DEMO'			=> 'Увімкнено показ позицій блоків',
 	'DISABLE_VISUAL_DEMO'	=> 'Відключити показ позицій блоків. F5 - оновити сторінку.',
