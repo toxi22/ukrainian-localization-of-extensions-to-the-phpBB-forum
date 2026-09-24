@@ -20,6 +20,9 @@ class admin_controller implements admin_interface
 	/** @var \phpbb\cache\driver\driver_interface */
 	protected $cache;
 
+	/** @var \phpbb\pages\routing\route_cache */
+	protected $route_cache;
+
 	/** @var \phpbb\controller\helper */
 	protected $helper;
 
@@ -60,6 +63,7 @@ class admin_controller implements admin_interface
 	* Constructor
 	*
 	* @param \phpbb\cache\driver\driver_interface $cache            Cache driver interface
+	* @param \phpbb\pages\routing\route_cache     $route_cache      Route cache
 	* @param \phpbb\controller\helper             $helper           Controller helper object
 	* @param \phpbb\language\language             $lang             Language object
 	* @param \phpbb\log\log                       $log              The phpBB log system
@@ -73,9 +77,10 @@ class admin_controller implements admin_interface
 	* @param string                               $php_ext          phpEx
 	* @access public
 	*/
-	public function __construct(\phpbb\cache\driver\driver_interface $cache, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
+	public function __construct(\phpbb\cache\driver\driver_interface $cache, \phpbb\pages\routing\route_cache $route_cache, \phpbb\controller\helper $helper, \phpbb\language\language $lang, \phpbb\log\log $log, \phpbb\pages\operators\page $page_operator, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, ContainerInterface $phpbb_container, \phpbb\event\dispatcher_interface $phpbb_dispatcher, $root_path, $php_ext)
 	{
 		$this->cache = $cache;
+		$this->route_cache = $route_cache;
 		$this->helper = $helper;
 		$this->lang = $lang;
 		$this->log = $log;
@@ -97,6 +102,8 @@ class admin_controller implements admin_interface
 	*/
 	public function display_pages()
 	{
+		add_form_key('phpbb_pages_purge_icons');
+
 		/* @var $pagination \phpbb\pagination */
 		$pagination = $this->container->get('pagination');
 		$start		= $this->request->variable('start', 0);
@@ -204,7 +211,7 @@ class admin_controller implements admin_interface
 		$this->lang->add_lang('posting');
 
 		// Add form key for form validation checks
-		add_form_key('add_edit_page');
+		add_form_key('phpbb_pages_add_edit_page');
 
 		// Collect form data
 		$data = array(
@@ -216,6 +223,7 @@ class admin_controller implements admin_interface
 			'bbcode'					=> $this->request->variable('parse_bbcode', false),
 			'magic_url'					=> $this->request->variable('parse_magic_url', false),
 			'smilies'					=> $this->request->variable('parse_smilies', false),
+			'markdown'					=> $this->request->variable('parse_markdown', false),
 			'html'						=> $this->request->variable('parse_html', false),
 			'page_template'				=> $this->request->variable('page_template', ''),
 			'page_links'				=> $this->request->variable('page_links', array(0)),
@@ -234,6 +242,7 @@ class admin_controller implements admin_interface
 			'bbcode'	=> $submit ? $data['bbcode'] : ($entity->get_id() ? $entity->content_bbcode_enabled() : 1),
 			'magic_url'	=> $submit ? $data['magic_url'] : ($entity->get_id() ? $entity->content_magic_url_enabled() : 1),
 			'smilies'	=> $submit ? $data['smilies'] : ($entity->get_id() ? $entity->content_smilies_enabled() : 1),
+			'markdown'	=> $submit ? $data['markdown'] : ($entity->get_id() ? $entity->content_markdown_enabled() : 0),
 			'html'		=> $submit ? $data['html'] : ($entity->get_id() ? $entity->content_html_enabled() : 0),
 		);
 
@@ -251,7 +260,7 @@ class admin_controller implements admin_interface
 		{
 			// Test if the form is valid
 			// Use -1 to allow unlimited time to submit form
-			if (!check_form_key('add_edit_page', -1))
+			if (!check_form_key('phpbb_pages_add_edit_page', -1))
 			{
 				$errors[] = $this->lang->lang('FORM_INVALID');
 			}
@@ -302,7 +311,7 @@ class admin_controller implements admin_interface
 					$this->page_operator->insert_page_links($entity->get_id(), $data['page_links']);
 
 					// Log the action
-					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_EDITED_LOG', time(), array($entity->get_title()));
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_EDITED_LOG', time(), array(utf8_encode_ncr($entity->get_title())));
 
 					// The result message to use
 					$message = 'ACP_PAGES_EDIT_SUCCESS';
@@ -316,14 +325,14 @@ class admin_controller implements admin_interface
 					$this->page_operator->insert_page_links($entity->get_id(), $data['page_links']);
 
 					// Log the action
-					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_ADDED_LOG', time(), array($entity->get_title()));
+					$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_ADDED_LOG', time(), array(utf8_encode_ncr($entity->get_title())));
 
 					// The result message to use
 					$message = 'ACP_PAGES_ADD_SUCCESS';
 				}
 
-				// Purge the cache to refresh route collections
-				$this->cache->purge();
+				// Purge compiled routes so the route collection is rebuilt
+				$this->route_cache->purge();
 
 				// Show user confirmation of the page and provide link back to the previous screen
 				trigger_error($this->lang->lang($message) . adm_back_link($this->u_action));
@@ -364,6 +373,7 @@ class admin_controller implements admin_interface
 			'S_PARSE_BBCODE_CHECKED'	=> $entity->content_bbcode_enabled(),
 			'S_PARSE_SMILIES_CHECKED'	=> $entity->content_smilies_enabled(),
 			'S_PARSE_MAGIC_URL_CHECKED'	=> $entity->content_magic_url_enabled(),
+			'S_PARSE_MARKDOWN_CHECKED'	=> $entity->content_markdown_enabled(),
 			'S_PARSE_HTML_CHECKED'		=> $entity->content_html_enabled(),
 
 			'BBCODE_STATUS'		=> $this->lang->lang('BBCODE_IS_ON', '<a href="' . $this->helper->route('phpbb_help_bbcode_controller') . '">', '</a>'),
@@ -412,7 +422,7 @@ class admin_controller implements admin_interface
 		}
 
 		// Log the action
-		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_DELETED_LOG', time(), array($entity->get_title()));
+		$this->log->add('admin', $this->user->data['user_id'], $this->user->ip, 'ACP_PAGES_DELETED_LOG', time(), array(utf8_encode_ncr($entity->get_title())));
 
 		// If AJAX was used, show user a result message
 		if ($this->request->is_ajax())
@@ -426,6 +436,22 @@ class admin_controller implements admin_interface
 				)
 			));
 		}
+	}
+
+	/**
+	* Purge the page icon cache
+	*
+	* @return void
+	* @access public
+	*/
+	public function purge_icons()
+	{
+		if (!check_form_key('phpbb_pages_purge_icons'))
+		{
+			trigger_error($this->lang->lang('FORM_INVALID') . adm_back_link($this->u_action), E_USER_WARNING);
+		}
+
+		$this->cache->destroy('_pages_icons');
 	}
 
 	/**

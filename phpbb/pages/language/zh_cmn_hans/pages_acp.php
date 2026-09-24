@@ -80,11 +80,12 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_TITLE_EXPLAIN'		=> '必填项',
 	'ACP_PAGES_FORM_DESC'				=> '单页描述',
 	'ACP_PAGES_FORM_DESC_EXPLAIN'		=> '只显示在ACP的单页列表中。',
-	'ACP_PAGES_FORM_DESC_DISPLAY'		=> 'Display as link title',
+	'ACP_PAGES_FORM_DESC_DISPLAY'		=> '显示为链接标题',
 	'ACP_PAGES_FORM_ROUTE'				=> '单页 URL 路径',
 	'ACP_PAGES_FORM_ROUTE_EXPLAIN'		=> '路径 <strong>route</strong> 是唯一的标识，放在单页 URL 的最后，用于表示单页的链接。 例如 <samp>http://www.phpbb.com/<strong>route</strong></samp>。 字母，数字，连字符号和下划线。这是必填项。',
 	'ACP_PAGES_FORM_CONTENT'			=> '单页内容',
-	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> '内容可以包含 BBCode 笑脸， 以及神奇网址，或者您可以启动 HTML 模式。 在 HTML 模式内，BBCode，笑脸和神奇网址无效，但是你可以自由使用任何有效的 HTML 语法。请注意这些内容会被加入到 HTML 模板内，所以您不应该包括 DOCTYPE，HTML， BODY 或者 HEAD 标签。但是其它标签可以使用，比如 IFRAME， SCRIPT， STYLE， EMBED， VIDEO等。 ',
+	'ACP_PAGES_FORM_CONTENT_EXPLAIN'	=> '内容可以使用 Markdown、常规 phpBB BBCode、表情和自动识别的 URL 创建，或者您可以启用 HTML 模式。在 HTML 模式下，Markdown、BBCode、表情和自动识别的 URL 将不会生效，但您可以自由使用任何有效的 HTML 语法。请注意，此内容将被添加到现有 HTML 模板中，因此不应包含 DOCTYPE、HTML、BODY 或 HEAD 标签。但是，可以使用其他所有 HTML 格式标签，包括 IFRAME、SCRIPT、STYLE、EMBED、VIDEO 等。',
+	'ACP_PAGES_PARSE_MARKDOWN'			=> '解析 Markdown',
 	'ACP_PAGES_FORM_TEMPLATE'			=> '单页模板',
 	'ACP_PAGES_FORM_TEMPLATE_EXPLAIN'	=> '定制单页模板 <samp>pages_*.html</samp> 可以加入到 phpBB 的 <samp>styles/*/template</samp> 文件夹。',
 	'ACP_PAGES_FORM_TEMPLATE_SELECT'	=> '选择一个模板',
@@ -100,7 +101,7 @@ $lang = array_merge($lang, array(
 	'ACP_PAGES_FORM_GUESTS_EXPLAIN'		=> '若设置为否，只有注册用户可以访问此单页。',
 	'ACP_PAGES_FORM_VIEW_PAGE'			=> '单页链接',
 	'ACP_PAGES_TITLE_SWITCH'			=> '首先显示页面标题',
-	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> '浏览器默认在网站标题之后显示页面标题 <samp style="white-space: nowrap">“Site Name - Page Title”</samp>。 启用这个选项会让页面标题显示在网站标题的前面 <samp style="white-space: nowrap">“Page Title - Site Name”</samp>。',
+	'ACP_PAGES_TITLE_SWITCH_EXPLAIN'	=> '浏览器默认在网站名称之后显示页面标题 <samp style="white-space: nowrap">“网站名称 - 页面标题”</samp>。启用此选项后，页面标题将显示在网站名称之前 <samp style="white-space: nowrap">“页面标题 - 网站名称”</samp>。',
 	'PARSE_HTML'						=> '解析 HTML',
 
 	// Page link location names
