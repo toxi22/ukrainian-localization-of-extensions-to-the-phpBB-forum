@@ -1,6 +1,0 @@
-name: VideoPress
-host: videopress.com
-example: https://videopress.com/v/VmccXaww
-extract: "!//videopress.com/v/(?'id'\\w+)!"
-iframe:
-    src: https://videopress.com/embed/{@id}

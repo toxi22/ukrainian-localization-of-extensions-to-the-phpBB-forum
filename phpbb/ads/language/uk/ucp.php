@@ -1,7 +1,9 @@
 <?php
 /**
  *
- * Advertisement management. An extension for the phpBB Forum Software package (russian).
+ * Advertisement management. An extension for the phpBB Forum Software package (ukrainian).
+ * Modified and maintained by @toxi (Roman Pavlovskyi).
+ * @copyright (c) 2026 @toxi (Roman Pavlovskyi)
  *
  * @copyright (c) 2017 phpBB Limited <https://www.phpbb.com>
  * @license GNU General Public License, version 2 (GPL-2.0)
